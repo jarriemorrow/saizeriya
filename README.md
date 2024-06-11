@@ -75,3 +75,6 @@ WebAPI：LINE Messaging API
 ■ 画面遷移図
 https://www.figma.com/design/VUkfjt0VZcRpC5r7AMKC6L/%E3%82%B5%E3%82%A4%E3%82%BC%E3%83%AA%E3%83%A4?node-id=21-8213&t=0tHng7iLOAEvpTPo-0
 
+
+■ ER図
+https://i.gyazo.com/3a1ef20d8b5a49b8ac026e387a978d80.png
