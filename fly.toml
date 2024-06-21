@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for saizeriya on 2024-06-19T11:06:31+09:00
+# fly.toml app configuration file generated for saizeriya on 2024-06-21T14:22:46+09:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'saizeriya-test1'
+app = 'saizeriya'
 primary_region = 'nrt'
 
 [build]
@@ -18,6 +18,4 @@ primary_region = 'nrt'
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
+  size = 'shared-cpu-1x'
