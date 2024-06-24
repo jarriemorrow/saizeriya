@@ -1,0 +1,19 @@
+<h1>login</h1>
+
+<%= form_with url: login_path, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control mb-3' %>
+    <%= f.submit 'ログイン',class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "Back to users", root_path %>
+</div>

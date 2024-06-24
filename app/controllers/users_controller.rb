@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  skip_before_action :require_login, only: %i[new]
+  skip_before_action :require_login, only: %i[new create]
 
   # GET /users or /users.json
   def index
@@ -20,20 +20,16 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users or /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      redirect_to root_path, success: (t 'flash.registration.success')
+    else
+      flash.now[:danger] = t 'flash.registration.failed'
+      render :new, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
@@ -66,6 +62,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end
