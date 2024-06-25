@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'posts/index'
+  get 'posts/new'
+  get 'posts/show'
   root 'tops#index'
   resources :users, only: %i[new create show]
   get 'login', to: 'user_sessions#new'
