@@ -1,2 +1,4 @@
 <h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+
+<% form_with model:@post, class: 'new_post' do |f| %>
+  <%= f.label :title %>
