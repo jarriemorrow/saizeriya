@@ -1,4 +1,13 @@
 <h1>Posts#new</h1>
 
-<% form_with model:@post, class: 'new_post' do |f| %>
-  <%= f.label :title %>
+<%= form_with(model: @post, local: true) do |f| %>
+
+  <div class="field">
+    <%= f.label :menus %><br>
+    <%= f.select :menu_ids, options_from_collection_for_select(@menus, :id, :menu_name), {}, multiple: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
