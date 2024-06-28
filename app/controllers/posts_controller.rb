@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      update_tags_and_menus
+      @post.menus = Menu.where(id: params[:post][:menu_ids])
       redirect_to @post, notice: 'Post was successfully created.'
     else
       @menus = Menu.all
@@ -26,10 +26,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, menu_ids: [])
-  end
-
-  def update_tags_and_menus
-    @post.menus = Menu.where(id: params[:post][:menu_ids])
+    params.require(:post).permit(:body, menu_ids: [])
   end
 end

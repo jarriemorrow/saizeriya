@@ -1,13 +1,33 @@
 <h1>Posts#new</h1>
 
 <%= form_with(model: @post, local: true) do |f| %>
-
   <div class="field">
-    <%= f.label :menus %><br>
-    <%= f.select :menu_ids, options_from_collection_for_select(@menus, :id, :menu_name), {}, multiple: true %>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+
+  <div id="menus">
+    <%= f.collection_select :menu_ids, @menus, :id, :menu_name, {}, { multiple: true } %>
+  </div>
+
+  <div>
+    <%= link_to 'Add Menu', '#', id: 'add-menu' %>
   </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const addMenuButton = document.getElementById("add-menu");
+    const menusContainer = document.getElementById("menus");
+
+    addMenuButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      const menuSelect = document.querySelector("select").cloneNode(true);
+      menusContainer.appendChild(menuSelect);
+    });
+  });
+</script>
