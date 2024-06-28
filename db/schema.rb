@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_28_075412) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_28_082229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_28_075412) do
     t.datetime "updated_at", null: false
     t.index ["menu_id"], name: "index_post_menus_on_menu_id"
     t.index ["post_id"], name: "index_post_menus_on_post_id"
+  end
+
+  create_table "post_tags", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_tags_on_post_id"
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -57,5 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_28_075412) do
 
   add_foreign_key "post_menus", "menus"
   add_foreign_key "post_menus", "posts"
+  add_foreign_key "post_tags", "posts"
+  add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "users"
 end
