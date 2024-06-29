@@ -1,7 +1,8 @@
 <h1>Topページ</h1>
 <% if logged_in?%>
 <div><%= current_user.name%>でログインしています</div>
-<div>投稿一覧</div>
+<div>
+<%= link_to '投稿一覧', posts_path %> </div>
 <div>投稿する</div>
 <div><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete }%></div>
 <% else %>
