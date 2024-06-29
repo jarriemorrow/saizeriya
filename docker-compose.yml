@@ -28,3 +28,8 @@ volumes:
   postgres_data:
   bundle_data:
   node_modules:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/kosuke/Projects/myapp/saizeriya/node_modules
+      o: bind
