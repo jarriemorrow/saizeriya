@@ -1,4 +1,9 @@
 <h1>Posts#show</h1>
 <% @post.menus.each do |menu| %>
-<%= menu.menu_name %>
+  <div>
+    <%= menu.menu_name %>
+    <%= menu.price %>円
+    No.<%= menu.menu_no %>
+  </div>
 <% end %>
+合計金額: <%= @post.total_price %> 円
