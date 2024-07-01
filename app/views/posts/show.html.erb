@@ -1,4 +1,15 @@
-<h1>投稿詳細</h1>
+<h1>投稿詳細</h1>  
+
+<% if current_user && current_user.own?(@post) %>
+  <%= link_to '編集', edit_post_path(@post) %>
+<% end %>
+<% if @post.tags.any? %>
+  <ul class="tag-list">
+    <% @post.tags.each do |tag| %>
+      <class="tag-item"><%= tag.name %>
+    <% end %>
+  </ul>
+<% end %>
 <p><%= @post.body %></p>
 <% @post.menus.each do |menu| %>
   <div>
