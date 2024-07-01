@@ -1,0 +1,6 @@
+<% f.object.menus.each do |menu| %>
+  <div class="nested-fields">
+    <%= f.collection_select :menu_ids, Menu.all, :id, :menu_name, { selected: menu.id }, include_blank: true, class: "form-control" %>
+    <%= link_to '削除', '#', class: 'remove-menu-field btn btn-danger' %>
+  </div>
+<% end %>

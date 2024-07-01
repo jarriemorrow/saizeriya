@@ -27,6 +27,26 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def edit
+    @post = Post.find(params[:id])
+    @menus = @post.menus
+    @tags = @post.tags
+  end
+
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      update_menus_and_tags
+      redirect_to @post, notice: '投稿が更新されました。'
+    else
+      render :edit
+      @menus = @post.menus
+      @tags = @post.tags
+    end
+  end
+
+
   private
 
   def post_params
