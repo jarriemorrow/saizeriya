@@ -1,12 +1,17 @@
 <h1>投稿一覧</h1>
-<div class="row">
-<div class="col-12">
-  <div class="row">
-      <% @posts.each do |post| %>
-        <%= render 'post', post: post%>
-      <% end %>
 
+<%= search_form_for @q, url: posts_path, method: :get do |f| %>
+  <%= f.label :recipe_name_or_body_or_menus_menu_name_or_tags_name_cont, "検索ワード" %>
+  <%= f.search_field :recipe_name_or_body_or_menus_menu_name_or_tags_name_cont, class: 'form-control', placeholder: '検索ワード' %>
+  <%= f.submit '検索', class: 'btn btn-primary' %>
+<% end %>
+
+<div class="row">
+  <div class="col-12">
+    <div class="row">
+      <% @posts.each do |post| %>
+        <%= render 'post', post: post %>
+      <% end %>
+    </div>
   </div>
 </div>
-</div>
-</div
