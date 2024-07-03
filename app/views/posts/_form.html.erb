@@ -16,10 +16,11 @@
   </div>
 
   <div class="form-group" id="menu-fields-container">
-    <p>メニュー</p>
     <% @post.menus.each_with_index do |menu, index| %>
       <div class="menu-field">
-        <%= f.label :menu_ids, "" %><br>
+      <% if index == 0 %>
+        <%= f.label :menu_ids, "メニュー" %><br>
+      <% end %>
         <%= f.collection_select :menu_ids, Menu.all, :id, :menu_name, { selected: menu.id }, { multiple: false, class: "form-control", name: "post[menu_ids][]", id: "post_menu_ids_#{index}" } %>
         <a href="#" class="remove-menu-field btn btn-danger">削除</a>
       </div>
