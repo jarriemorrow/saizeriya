@@ -19,7 +19,7 @@
         <a href="#" class="remove-menu-field btn btn-danger">削除</a>
       </div>
     <% end %>
-    <a href="#" id="add-menu-field" class="btn btn-secondary">メニューを追加</a>
+    <%= link_to 'メニューを追加',"", id: "add-menu-field", class: "btn btn-secondary", data: {turbo:false}%>
   </div>
 
   <div class="actions">
