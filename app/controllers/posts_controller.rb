@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :require_login, only: %i[index show]
+  before_action :set_post, only: %i[show edit update destroy]
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true).includes(:menus, :tags).order(created_at: :desc).page(params[:page])
@@ -7,8 +8,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post.menus.build
-    @post.tags.build
+    @post.post_menus.build
+    @post.post_tags.build
   end
 
   def create
@@ -20,15 +21,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.includes(:menus, :tags).find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @post = Post.includes(:menus, :tags).find(params[:id])
-    @post.post_menus.build if @post.post_menus.empty?
-    @post.post_tags.build if @post.post_tags.empty?
-  end
+  def edit; end
 
   def update
     if @post.update(post_params)
@@ -38,8 +33,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post.destroy!
+    redirect_to posts_path, status: :see_other
+  end
 
   private
+
+  def set_post
+    @post = current_user.posts.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:recipe_name, :body, post_tags_attributes: [:id, :tag_id], post_menus_attributes: [:id, :menu_id])
