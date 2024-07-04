@@ -7,18 +7,15 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @menus = Menu.all
-    @tags = Tag.all
+    @post.menus.build
+    @post.tags.build
   end
 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      update_menus_and_tags
       redirect_to @post, notice: 'Post was successfully created.'
     else
-      @menus = Menu.all
-      @tags = Tag.all
       render :new
     end
   end
@@ -29,18 +26,14 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.includes(:menus, :tags).find(params[:id])
+    @post.post_menus.build if @post.post_menus.empty?
+    @post.post_tags.build if @post.post_tags.empty?
   end
 
-
-
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
-      update_menus_and_tags
       redirect_to @post, notice: '投稿が更新されました。'
     else
-      @menus = @post.menus
-      @tags = @post.tags
       render :edit
     end
   end
@@ -49,11 +42,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, menu_ids: [], tag_ids: [])
-  end
-
-  def update_menus_and_tags
-    @post.menus = Menu.where(id: params[:post][:menu_ids])
-    @post.tags = Tag.where(id: params[:post][:tag_ids])
+    params.require(:post).permit(:recipe_name, :body, post_tags_attributes: [:id, :tag_id], post_menus_attributes: [:id, :menu_id])
   end
 end

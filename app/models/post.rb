@@ -1,9 +1,12 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :post_menus
+  has_many :post_menus, dependent: :destroy
   has_many :menus, through: :post_menus
-  has_many :post_tags
+  has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+
+  accepts_nested_attributes_for :post_menus, allow_destroy: true
+  accepts_nested_attributes_for :post_tags, allow_destroy: true
 
   # メニューの合計値計算
   def total_price
