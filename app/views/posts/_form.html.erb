@@ -11,7 +11,7 @@
   <div class="form-group">
     <div id="tag-fields-container">
       <%= f.label :tag_ids, "メニュー種類"%><br>
-      <%= f.collection_radio_buttons :tag_ids, Tag.all, :id, :name, {}, { multiple: true, class: "form-control" } %>
+      <%= f.collection_select :tag_ids, Tag.all, :id, :name, { include_blank: true }, { multiple: false, class: "form-control" } %>
     </div>
   </div>
 
