@@ -24,14 +24,13 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:menus, :tags).find(params[:id])
   end
 
   def edit
-    @post = Post.find(params[:id])
-    @menus = @post.menus
-    @tags = @post.tags
+    @post = Post.includes(:menus, :tags).find(params[:id])
   end
+
 
 
   def update
@@ -40,9 +39,9 @@ class PostsController < ApplicationController
       update_menus_and_tags
       redirect_to @post, notice: '投稿が更新されました。'
     else
-      render :edit
       @menus = @post.menus
       @tags = @post.tags
+      render :edit
     end
   end
 
