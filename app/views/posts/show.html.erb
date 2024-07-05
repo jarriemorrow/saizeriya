@@ -1,21 +1,34 @@
-<h1>投稿詳細</h1>  
+<h1>投稿詳細</h1>
 
 <% if current_user.own?(@post) %>
-  <%= link_to '編集', edit_post_path(@post) %>
+  <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
+  <%= link_to '削除', post_path(@post), data: { turbo_confirm: '本当に削除しますか？', turbo_method: :delete }, class: 'btn btn-danger', style: 'margin-left: 10px;' %>
 <% end %>
+
 <% if @post.tags.any? %>
   <ul class="tag-list">
     <% @post.tags.each do |tag| %>
-      <class="tag-item"><%= tag.name %>
+      <li class="tag-item"><%= tag.name %></li>
     <% end %>
   </ul>
 <% end %>
-<p><%= @post.body %></p>
-<% @post.menus.each do |menu| %>
-  <div>
-    <%= menu.menu_name %>
-    <%= menu.price %>円
-    No.<%= menu.menu_no %>
+
+<div class="post-body">
+  <p><%= @post.body %></p>
+</div>
+
+<% if @post.menus.any? %>
+  <div class="menu-list">
+    <% @post.menus.each do |menu| %>
+      <div class="menu-item">
+        <h3><%= menu.menu_name %></h3>
+        <p><%= menu.price %>円</p>
+        <p>No.<%= menu.menu_no %></p>
+      </div>
+    <% end %>
   </div>
 <% end %>
-合計金額: <%= @post.total_price %> 円
+
+<div class="total-price">
+  <h2>合計金額: <%= @post.total_price %> 円</h2>
+</div>
