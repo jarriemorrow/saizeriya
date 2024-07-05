@@ -8,8 +8,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post.post_menus.build
     @post.post_tags.build
+    @post.post_menus.build
   end
 
   def create
@@ -47,6 +47,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:recipe_name, :body, post_tags_attributes: [:id, :tag_id], post_menus_attributes: [:id, :menu_id])
+    params.require(:post).permit(:recipe_name, :body, post_tags_attributes: [:id, :tag_id], post_menus_attributes: [:id, :menu_id, :_destroy])
   end
 end
