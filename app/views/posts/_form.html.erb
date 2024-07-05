@@ -27,10 +27,12 @@
         </div>
       <% end %>
     </div>
-    <%= button_tag 'メニューを追加', type: 'button', id: 'add-menu-button', class: 'btn btn-primary' %>
+    <%= button_tag 'メニューを追加', type: 'button', id: 'add-menu-button', class: 'btn btn-primary', data:  { turbo: false} %>
   </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= javascript_include_tag 'posts_form', 'data-turbolinks-track': 'reload' %>
