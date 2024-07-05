@@ -78,3 +78,4 @@ gem "sorcery"
 gem "ransack"
 gem "config"
 gem "kaminari"
+gem 'cocooned'
