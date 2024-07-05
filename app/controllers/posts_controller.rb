@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :require_login, only: %i[index show]
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[edit update destroy]
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true).includes(:menus, :tags).order(created_at: :desc).page(params[:page])
@@ -21,7 +21,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @post = Post.find(params[:id])
+  end
 
   def edit; end
 
