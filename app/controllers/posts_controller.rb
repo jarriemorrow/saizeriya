@@ -40,6 +40,11 @@ class PostsController < ApplicationController
     redirect_to posts_path, status: :see_other
   end
 
+  def likes
+    @q = current_user.like_posts.ransack(params[:q])
+    @like_posts = @q.result(distinct: true).include(:user).order(created_at: :desc).page(params[:page])
+  end
+
   private
 
   def set_post
