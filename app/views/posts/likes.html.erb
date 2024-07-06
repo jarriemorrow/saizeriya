@@ -1,0 +1,19 @@
+<h1>いいね一覧</h1>
+
+<%= render 'shared/search_form', q: @q %>
+
+<div>
+  <% if @like_posts.present? %>
+    <%= render @like_posts %>
+  <% else %>
+    <p>いいねしてません</p>
+  <% end %>
+</div>
+
+<div>
+  <%= paginate @like_posts %>
+</div>
+
+<div>
+  <%= link_to 'TOPへ戻る', root_path %>
+</div>
