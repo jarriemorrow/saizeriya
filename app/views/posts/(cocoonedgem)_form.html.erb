@@ -1,0 +1,36 @@
+<%= form_with model: post, data: { turbo: false } do |f| %>
+  <div class="field">
+    <%= f.label :recipe_name, "レシピ名" %><br>
+    <%= f.text_field :recipe_name %>
+  </div>
+  <div class="field">
+    <%= f.label :body, "コメント" %><br>
+    <%= f.text_area :body %>
+  </div>
+  
+  <div class="form-group">
+    <div id="tag-fields-container">
+      <%= f.fields_for :post_tags do |tag_fields| %>
+        <div class="tag-field">
+          <%= tag_fields.label :tag_id, "タグ" %><br>
+          <%= tag_fields.collection_select :tag_id, Tag.all, :id, :name, { include_blank: true }, { class: "form-control" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group" id="menu-fields-container">
+    <%= cocooned_container do %>
+      <%= f.fields_for :post_menus do |menu_fields| %>
+        <div class="menu-field">
+          <%= render 'post_menu_fields', f: menu_fields %>
+        </div>
+      <% end %>
+      <%= cocooned_add_item_link 'Add an item', f, :post_menus, data: {turbo: false}, layout: false %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,4 @@
-<%= form_with(model: @post, local: true, html: { id: "post-form" }) do |f| %>
+<%= form_with model: post, data: { turbo: false } do |f| %>
   <div class="field">
     <%= f.label :recipe_name, "レシピ名" %><br>
     <%= f.text_field :recipe_name %>
@@ -28,7 +28,7 @@
         <%= link_to '削除', '#', class: 'remove-menu-field btn btn-danger' %>
       </div>
     <% end %>
-    <%= button_tag 'メニューを追加', type: 'button', id: "add-menu-button", class: "btn btn-primary" %>
+    <%= button_tag 'メニューを追加', type: 'button', id: "add-menu-button", class: "btn btn-primary", data: {turbo: false}%>
   </div>
 
   <div class="actions">
@@ -37,18 +37,18 @@
 <% end %>
 
 <%= javascript_tag do %>
-  document.addEventListener("turbo:load", function() {
+  document.addEventListener("turbo:render", function() {
     const addMenuButton = document.getElementById("add-menu-button");
     const menuFieldsContainer = document.getElementById("menu-fields-container");
     let menuFieldIndex = document.querySelectorAll('.menu-field').length;
-  
+
     addMenuButton.addEventListener("click", function(event) {
       event.preventDefault(); // デフォルトのフォーム送信を防ぐ
       const newMenuField = createMenuField(menuFieldIndex);
       menuFieldsContainer.appendChild(newMenuField);
       menuFieldIndex++;
     });
-  
+
     menuFieldsContainer.addEventListener("click", function(event) {
       if (event.target.classList.contains("remove-menu-field")) {
         event.preventDefault();
@@ -57,7 +57,7 @@
         menuField.style.display = 'none';
       }
     });
-  
+
     function createMenuField(index) {
       const menuField = document.createElement("div");
       menuField.classList.add("menu-field");
@@ -74,5 +74,4 @@
       return menuField;
     }
   });
-  
 <% end %>
