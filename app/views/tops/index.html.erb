@@ -4,6 +4,7 @@
   <div><%= link_to '投稿一覧', posts_path %></div>
   <div><%= link_to '投稿する', posts_new_path %></div>
   <div><%= link_to 'いいね一覧', likes_posts_path %></div>
+  <div><%= link_to 'マイページ', user_path(current_user) %></div>
   <div><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete }%></div>
 <% else %>
   <div><%= link_to '投稿一覧', posts_path %></div>
