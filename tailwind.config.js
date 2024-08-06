@@ -1,14 +1,14 @@
-// tailwind.config.js
 module.exports = {
   content: [
-    './app/**/*.html.erb',
+    './app/views/**/*.html.erb',
     './app/helpers/**/*.rb',
-    './app/javascript/**/*.js'
+    './app/javascript/**/*.js',
+    './app/assets/stylesheets/**/*.css'
   ],
   theme: {
     extend: {},
   },
   plugins: [
-    require('daisyui')
+    require('daisyui'),
   ],
 }
