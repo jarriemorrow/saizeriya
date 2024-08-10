@@ -79,3 +79,4 @@ gem "ransack"
 gem "config"
 gem "kaminari"
 gem 'cocooned'
+gem "tailwindcss-rails"
