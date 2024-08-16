@@ -1,21 +1,23 @@
-<header class="navbar bg-neutral">
-<div class="navbar bg-base-100">
-  <div class="flex-1">
+<header class="navbar shadow-xl bg-slate-200 top-50 z-50 w-full">
+  <div class= "navbar-center">
     <%= link_to 'サイゼを１００％たのしむサイト', root_path, class:'btn btn-ghost text-xl' %> 
   </div>
   <div class="drawer drawer-end">
-  <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content">
-    <!-- Page content here -->
-    <label for="my-drawer-4" class="drawer-button btn btn-primary">Open drawer</label>
+    <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <!-- Page content here -->
+      <label for="my-drawer-4" class="drawer-button btn btn-ghost ">
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" /></svg>
+      </label>
+    </div>
+    <div class="drawer-side">
+      <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+
+      <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+        <!-- Sidebar content here -->
+        <li><a>Sidebar Item 1</a></li>
+        <li><a>Sidebar Item 2</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="drawer-side">
-    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-      <!-- Sidebar content here -->
-      <li><a>Sidebar Item 1</a></li>
-      <li><a>Sidebar Item 2</a></li>
-    </ul>
-  </div>
-</div>
 </header>
