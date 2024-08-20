@@ -1,13 +1,22 @@
-<h1>Topページ</h1>
-<% if logged_in?%>
-  <div><%= current_user.name%>でログインしています</div>
-  <div><%= link_to '投稿一覧', posts_path %></div>
-  <div><%= link_to '投稿する', posts_new_path , class: 'btn btn-neutral' %></div>
-  <div><%= link_to 'いいね一覧', likes_posts_path %></div>
-  <div><%= link_to 'マイページ', user_path(current_user) %></div>
-  <div><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete }%></div>
-<% else %>
-  <div><%= link_to '投稿一覧', posts_path %></div>
-  <div><%= link_to "ユーザー登録", new_user_path %></div>
-  <div><%= link_to "ログイン", login_path %></div>
-<% end %>
+<div class="mx-auto mb-20 text-center">
+  <div class="mt-16 md:mt-20">
+    <div>
+      <h1 class="text-center">サイゼリヤをもっと楽しむ方法ってない？</h1>
+      <%= image_tag 'Raffaellomadonna.svg', class: "mx-auto" %>
+    </div>
+  </div>
+  <div class="md-flex">
+    <% if logged_in? %>
+      <div><%= current_user.name %>でログインしています</div>
+      <div><%= link_to '投稿一覧', posts_path %></div>
+      <div class="mt:mb-50"><%= link_to '投稿する', posts_new_path, class: 'btn btn-neutral' %></div>
+      <div><%= link_to 'いいね一覧', likes_posts_path %></div>
+      <div><%= link_to 'マイページ', user_path(current_user) %></div>
+      <div><%= link_to "ログアウト", logout_path, data: {turbo_method: :delete } %></div>
+    <% else %>
+      <div><%= link_to '投稿一覧', posts_path, class: 'btn btn-neutral mt-10 mb-10' %></div>
+      <div><%= link_to "ユーザー登録", new_user_path %></div>
+      <div><%= link_to "ログイン", login_path %></div>  
+    <% end %>
+  </div>
+</div>
