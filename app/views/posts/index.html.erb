@@ -1,15 +1,15 @@
-<h1>投稿一覧</h1>
-
-<%= render 'shared/search_form', q: @q %>
-
-<div>
-  <% @posts.each do |post| %>
-    <%= render 'post', post: post %>
-  <% end %>
-</div>
-<div>
-  <%= paginate @posts %>
-</div>
-<div>
-  <%= link_to 'TOPへ戻る', root_path %>
+<div class="mt-16 mb-16">
+  <h1>投稿一覧</h1>
+  <%= render 'shared/search_form', q: @q %>
+  <div>
+    <% @posts.each do |post| %>
+      <%= render 'post', post: post %>
+    <% end %>
+  </div>
+  <div>
+    <%= paginate @posts %>
+  </div>
+  <div>
+    <%= link_to 'TOPへ戻る', root_path %>
+  </div>
 </div>

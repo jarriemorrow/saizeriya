@@ -1,4 +1,4 @@
-<%= form_with model: post, data: { turbo: false } do |f| %>
+<%= form_with model: post do |f| %>
   <div class="field">
     <%= f.label :recipe_name, "レシピ名" %><br>
     <%= f.text_field :recipe_name %>
@@ -26,7 +26,7 @@
           <%= render 'post_menu_fields', f: menu_fields %>
         </div>
       <% end %>
-      <%= cocooned_add_item_link 'Add an item', f, :post_menus, data: {turbo: false}, layout: false, class: "btn btn-primary" %>
+      <%= cocooned_add_item_link 'Add an item', f, :post_menus, layout: false, class: "btn btn-primary" %>
     <% end %>
   </div>
 
