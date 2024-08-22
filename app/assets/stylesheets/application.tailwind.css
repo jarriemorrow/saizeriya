@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 @import "daisyui";
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1px white;
+    text-stroke: 0.5px white;
+  }
+}
