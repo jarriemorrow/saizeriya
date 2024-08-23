@@ -1,15 +1,12 @@
 <div class="mx-auto mb-20 text-center">
-  <div class="mt-16 md:mt-20">
-    <h1 class="text-center">サイゼリヤをもっと楽しむ方法ってない？</h1>
-    <%= image_tag 'Raffaellomadonna.svg', class: "mx-auto" %>
-  </div>
-
+  <h1 class="text-center">サイゼリヤをもっと楽しむ方法ってない？</h1>
+  <%= image_tag 'Raffaellomadonna.svg', class: "mx-auto" %>
   <% if logged_in? %>
     <div class="flex flex-wrap justify-center md-16 space-y-4 md:space-y-0">
       <div class="card bg-base-200 w-80 shadow-l md:mx-4">
         <div class="card-body">
           <h2 class="card-title">１．メニューを作ろう！</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <p>ここにメニュー作成の説明を入れます。</p>
           <div class="card-actions justify-center">
             <%= link_to '投稿一覧', posts_path, class: 'mb-4 btn w-64 bg-neutral text-white' %>
           </div>
@@ -18,8 +15,8 @@
 
       <div class="card bg-base-200 w-80 shadow-l md:mx-4">
         <div class="card-body">
-          <h2 class="card-title">２．投稿する！</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <h2 class="card-title">２．みんなで食べよう</h2>
+          <p>ここに何かしらの説明を入れます。</p>
           <div class="card-actions justify-center">
             <%= link_to '投稿する', posts_new_path, class: 'mb-4 btn w-64 bg-emerald-500 text-white', data: { turbo: false } %>
           </div>
