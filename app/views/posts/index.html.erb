@@ -4,9 +4,7 @@
     <%= render 'shared/search_form', q: @q %>
   </div>
   <div>
-    <% @posts.each do |post| %>
-      <%= render 'post', post: post %>
-    <% end %>
+     <%= render @posts %>
   </div>
   <div>
     <%= paginate @posts %>
