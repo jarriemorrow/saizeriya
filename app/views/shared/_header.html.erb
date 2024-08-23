@@ -1,7 +1,7 @@
 <header class="navbar shadow-xl bg-emerald-500 fixed top-0 z-50 w-full">
   <div class="navbar-start"></div>
   <div class="navbar-center">
-    <%= link_to 'サイゼの最強の組み合わせ', "/", class: "btn btn-ghost text-xl text-error text-stroke" %>
+    <%= link_to 'サイゼリヤ攻略サイト', "/", class: "btn btn-ghost text-3xl text-error text-stroke w-full" %>
   </div>
   <div class="navbar-end drawer-end">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
@@ -12,14 +12,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-5 w-5 stroke-current">
          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="white" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
-      </label>
+      </label> 
     </div>
     <div class="drawer-side">
       <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
       <div class="p-4 w-3/4 md:w-1/3 min-h-full bg-emerald-500 text-base-content">
 
         <!-- Sidebar content here -->
-
 
         <% if logged_in? %>
           <div class="divider divider-primary"></div>
@@ -39,7 +38,6 @@
               </div>
             <% end %>
           </div>
-
           <div class="mb-2">
             <%= link_to posts_new_path, class: 'w-full btn btn-ghost btn-sm' do %>
               <div class="w-full justify-between"> 
@@ -47,15 +45,13 @@
               </div>
             <% end %>
           </div>
-
           <div class="mb-2">
             <%= link_to likes_posts_path, class: 'w-full btn btn-ghost btn-sm' do %>
               <div class="w-full justify-between"> 
                 <div>いいね一覧</div>
               </div>
             <% end %>
-          </div>
-          
+          </div>          
           <div class="mb-2">
             <%= link_to logout_path, class: 'w-full btn btn-ghost btn-sm', data: { turbo_method: :delete } do %>
               <div class="w-full justify-between"> 

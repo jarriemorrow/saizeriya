@@ -1,38 +1,40 @@
-<h1>投稿詳細</h1>
+<div class="mt-16 mb-16">
+  <h1>投稿詳細</h1>
 
-<% if logged_in? && current_user.own?(@post) %>
-  <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary', data: {turbo: false} %>
-  <%= link_to '削除', post_path(@post), data: { turbo_confirm: '本当に削除しますか？', turbo_method: :delete }, class: 'btn btn-danger', style: 'margin-left: 10px;' %>
-<% end %>
-<% if logged_in? %>
-  <%= render 'like_or_unlike', post: @post %>
-<% end %>
-<% if @post.tags.any? %>
-  <ul class="tag-list">
-    <% @post.tags.each do |tag| %>
-      <li class="tag-item"><%= tag.name %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if logged_in? && current_user.own?(@post) %>
+    <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary', data: {turbo: false} %>
+    <%= link_to '削除', post_path(@post), data: { turbo_confirm: '本当に削除しますか？', turbo_method: :delete }, class: 'btn btn-danger', style: 'margin-left: 10px;' %>
+  <% end %>
+  <% if logged_in? %>
+    <%= render 'like_or_unlike', post: @post %>
+  <% end %>
+  <% if @post.tags.any? %>
+    <ul class="tag-list">
+      <% @post.tags.each do |tag| %>
+        <li class="tag-item"><%= tag.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<div class="post-body">
-  <p><%= @post.body %></p>
-</div>
-
-<% if @post.menus.any? %>
-  <div class="menu-list">
-    <% @post.menus.each do |menu| %>
-      <div class="menu-item">
-        <h3><%= menu.menu_name %></h3>
-        <p><%= menu.price %>円</p>
-        <p>No.<%= menu.menu_no %></p>
-      </div>
-    <% end %>
+  <div class="post-body">
+    <p><%= @post.body %></p>
   </div>
-<% end %>
 
-<div class="total-price">
-  <h2>合計金額: <%= @post.total_price %> 円</h2>
+  <% if @post.menus.any? %>
+    <div class="menu-list">
+      <% @post.menus.each do |menu| %>
+        <div class="menu-item">
+          <h3><%= menu.menu_name %></h3>
+          <p><%= menu.price %>円</p>
+          <p>No.<%= menu.menu_no %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="total-price">
+    <h2>合計金額: <%= @post.total_price %> 円</h2>
+  </div>
+
+  <%= link_to '投稿一覧へもどる', posts_path %>
 </div>
-
-<%= link_to '投稿一覧へもどる', posts_path %>
