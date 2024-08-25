@@ -1,8 +1,5 @@
-<div class="mt-16 mb-16">
-  <h1>いいね一覧</h1>
-
+<div class="mx-auto text-center">
   <%= render 'shared/search_form', q: @q %>
-
   <div>
     <% if @like_posts.present? %>
       <%= render @like_posts %>
