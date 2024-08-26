@@ -80,5 +80,5 @@ gem "config"
 gem "kaminari"
 gem 'cocooned'
 gem "tailwindcss-rails"
-gem "aws-sdk-s3"
+gem "aws-sdk-s3", require: false
 gem "carrierwave", '~>2.2.2'
