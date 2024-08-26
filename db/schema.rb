@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_26_024748) do
     t.datetime "updated_at", null: false
     t.string "crypted_password"
     t.string "salt"
-    t.string "avator"
+    t.string "avatar"
   end
 
   add_foreign_key "likes", "posts"
