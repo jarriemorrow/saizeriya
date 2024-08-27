@@ -5,23 +5,27 @@ ja:
       submit: 保存
       update: 更新
     label:
+      name: 名前
       email: メールアドレス
       password: パスワード
-  user_sessions:
+      password_confirmation: パスワード（確認）
+  defaults:
     new:
+      new user: あららい
       title: ログイン
       login: ログイン
       to_register_page: 登録ページへ
       password_forget: パスワードをお忘れの方はこちら
   users:
     new:
+      name: 名前
       title: ユーザー登録
       to_login_page: ログインページへ
   header:
     login: ログイン
-    logout: ログアウト
-    board: 掲示板
-    board_index: 掲示板一覧
+    logout: ログアウト　
+    post: 投稿
+    post_index: 掲示板一覧
     create_board: 掲示板作成
-    bookmark_index: ブックマーク一覧
+    like_index: ブックマーク一覧
     profile: プロフィール
