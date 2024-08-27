@@ -83,4 +83,5 @@ gem "tailwindcss-rails"
 gem "aws-sdk-s3", require: false
 gem "carrierwave", '~>2.2.2'
 gem "rails-i18n"
-gem "fog"
+gem "dotenv-rails"
+gem "fog-aws"
