@@ -19,6 +19,7 @@
   <div class='form-group mb-3 mb-3'>
     <%= f.label :avatar %>
     <%= f.file_field :avatar, class: 'form-control file-input file-input-sm file-input-bordered w-full max-w-xs' %>
+    <%= image_tag @user.avatar_url, class: 'h-50 w-50' %>
   </div>
   <%= f.submit class: 'btn btn-primary mb-3' %>
 <% end %>
