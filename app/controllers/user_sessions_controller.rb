@@ -18,6 +18,7 @@ class UserSessionsController < ApplicationController
     redirect_to root_path, status: :see_other
   end
 
+
   private
 
   def redirect_if_logged_in
