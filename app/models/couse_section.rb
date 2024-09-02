@@ -1,0 +1,2 @@
+class CouseSection < ApplicationRecord
+end
