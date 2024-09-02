@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :post_menus, dependent: :destroy
+  has_many :course_menus, dependent: :destroy
+
   has_many :menus, through: :post_menus
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
