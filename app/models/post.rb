@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   has_many :likes, dependent: :destroy
 
+  accepts_nested_attributes_for :course_menus, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :post_menus, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :post_tags, allow_destroy: true
 
