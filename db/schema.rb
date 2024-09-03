@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_03_054923) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_03_080250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_03_054923) do
     t.string "menu_no", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pairing_menus", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "menu_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_pairing_menus_on_menu_id"
+    t.index ["post_id"], name: "index_pairing_menus_on_post_id"
   end
 
   create_table "post_menus", force: :cascade do |t|
@@ -108,6 +117,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_03_054923) do
   add_foreign_key "course_menus", "posts"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "pairing_menus", "menus"
+  add_foreign_key "pairing_menus", "posts"
   add_foreign_key "post_menus", "menus"
   add_foreign_key "post_menus", "posts"
   add_foreign_key "post_tags", "posts"
