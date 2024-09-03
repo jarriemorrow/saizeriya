@@ -2,13 +2,13 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :post_menus, dependent: :destroy
   has_many :course_menus, dependent: :destroy
+  has_many :course_related_menus, through: :course_menus, source: :menu
 
-  has_many :menus, through: :post_menus
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   has_many :likes, dependent: :destroy
 
-  accepts_nested_attributes_for :course_menus, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :course_menus, allow_destroy: true
   accepts_nested_attributes_for :post_menus, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :post_tags, allow_destroy: true
 
