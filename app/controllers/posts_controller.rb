@@ -10,6 +10,8 @@ class PostsController < ApplicationController
     @post = Post.new
     @post.post_tags.build
     @post.course_menus.build
+    @post.arrange_menus.build
+    @post.pairing_menus.build
   end
 
   def create
