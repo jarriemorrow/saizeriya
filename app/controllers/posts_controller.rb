@@ -52,6 +52,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:recipe_name, :body, post_tags_attributes: [:id, :tag_id], post_menus_attributes: [:id, :menu_id, :_destroy])
+    params.require(:post).permit(:recipe_name, :body, post_tags_attributes: [:id, :tag_id], course_menus_attributes: [:id, :menu_id, :course_section_id, :_destroy])
   end
 end
