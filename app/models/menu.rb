@@ -1,6 +1,9 @@
 class Menu < ApplicationRecord
   has_many :post_menus
   has_many :posts, through: :post_menus
+  has_many :arrange_menus
+  has_many :course_menus
+  has_many :pairing_menus
 
   validates :menu_name, presence: true
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -11,6 +14,6 @@ class Menu < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["posts", "post_menus"]
+    ["posts", "arrange_menus", "course_menus", "pairing_menus"]
   end
 end
