@@ -20,7 +20,7 @@ class Post < ApplicationRecord
 
   # メニューの合計値計算
   def total_price
-    menus.sum(:price)
+    course_related_menus.sum(:price) + arrange_related_menus.sum(:price) + pairing_related_menus.sum(:price)
   end
 
   # 検索可能な属性を指定
@@ -29,6 +29,7 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["menus", "tags"]
+    ["course_related_menus", "arrange_related_menus", "pairing_related_menus", "tags"]
   end
+  
 end
