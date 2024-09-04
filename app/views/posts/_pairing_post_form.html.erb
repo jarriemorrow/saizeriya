@@ -1,0 +1,31 @@
+<%= form_with(model: @post, local: true) do |f| %>
+  <div>
+    <%= f.label :recipe_name, "レシピ名" %>
+    <%= f.text_field :recipe_name %>
+  </div>
+
+  <div>
+    <%= f.label :body, "説明" %>
+    <%= f.text_area :body %>
+  </div>
+
+  <h3>コースメニューの追加</h3>
+  <%= f.fields_for :pairingg_menus do |pm| %>
+  <div class="form-group" id="menu-fields-container">
+    <%= cocooned_container do %>
+      <%= f.fields_for :pairing_menus do |menu_fields| %>
+        <div class="menu-field">
+          <%= render 'post_menu_fields', f: menu_fields %>
+        </div>
+      <% end %>
+      <%= cocooned_add_item_link 'Add an item', f, :post_menus, layout: false, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+
+  <% end %>
+
+  <div>
+    <%= f.submit "投稿", class: 'btn' %>
+  </div>
+<% end %>

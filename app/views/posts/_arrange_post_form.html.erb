@@ -1,0 +1,24 @@
+<%= form_with(model: @post, local: true) do |f| %>
+  <div>
+    <%= f.label :recipe_name, "レシピ名" %>
+    <%= f.text_field :recipe_name %>
+  </div>
+
+  <div>
+    <%= f.label :body, "説明" %>
+    <%= f.text_area :body %>
+  </div>
+
+  <h3>コースメニューの追加</h3>
+  <%= f.fields_for :arrange_menus do |am| %>    
+    <div>
+      <%= am.label :menu_id, "メニューアイテム" %>
+      <%= am.collection_select :menu_id, Menu.all, :id, :menu_name %>
+    </div>
+
+  <% end %>
+
+  <div>
+    <%= f.submit "投稿", class: 'btn' %>
+  </div>
+<% end %>
