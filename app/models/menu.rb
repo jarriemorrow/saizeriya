@@ -3,6 +3,7 @@ class Menu < ApplicationRecord
   has_many :posts, through: :post_menus
   has_many :arrange_menus
   has_many :course_menus
+  has_many :course_sections, through: :course_menus
   has_many :pairing_menus
 
   validates :menu_name, presence: true
