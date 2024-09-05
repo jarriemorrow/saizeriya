@@ -22,7 +22,15 @@ class Post < ApplicationRecord
 
   # メニューの合計値計算
   def total_price
-    course_related_menus.sum(:price) + arrange_related_menus.sum(:price) + pairing_related_menus.sum(:price)
+    Menu.joins(:course_menus)
+        .where(course_menus: { post_id: id })
+        .sum(:price) +
+    Menu.joins(:arrange_menus)
+        .where(arrange_menus: { post_id: id })
+        .sum(:price) +
+    Menu.joins(:pairing_menus)
+        .where(pairing_menus: { post_id: id })
+        .sum(:price)
   end
 
   # 検索可能な属性を指定
