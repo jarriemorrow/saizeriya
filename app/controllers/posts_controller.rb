@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).order(created_at: :desc).page(params[:page])
+    @posts = @q.result(distinct: true).includes(:user, :likes).order(created_at: :desc).page(params[:page])
   end
 
   def new
