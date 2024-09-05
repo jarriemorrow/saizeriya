@@ -1,57 +1,37 @@
 <%= form_with model: post, local: true do |f| %>
-  <div class="field">
-    <%= f.label :recipe_name, "レシピ名" %><br>
-    <%= f.text_field :recipe_name %>
-  </div>
-  <div class="field">
-    <%= f.label :body, "コメント" %><br>
-    <%= f.text_area :body %>
-  </div>
-
-  <div class="form-group">
-    <div id="tag-fields-container">
-      <%= f.fields_for :post_tags do |tag_fields| %>
-        <div class="tag-field">
-          <%= tag_fields.label :tag_id, "タグ" %><br>
-          <%= tag_fields.collection_select :tag_id, Tag.all, :id, :name, { include_blank: true }, { class: "form-control" } %>
-        </div>
+  <div data-controller="tabs" data-tabs-active-tab="border-l border-t border-r rounded-t">
+    <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl">
+      <% Tag.all.each do |tag| %>
+        <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change" data-tab="<%= tag.id %>">
+          <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">
+            <%= tag.name %>
+          </a>
+        </li>
       <% end %>
+    </ul>
+
+    <!-- タブコンテンツ -->
+    <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
+      <turbo-frame id="arrange-form">
+        <%= render partial: 'posts/arrange_form', locals: { f: f } %>
+      </turbo-frame>
+    </div>
+    <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="pairing">
+      <turbo-frame id="pairing-form">
+        <%= render partial: 'posts/pairing_form', locals: { f: f } %>
+      </turbo-frame>
+    </div>
+    <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
+      <turbo-frame id="course-form">
+        <%= render partial: 'posts/course_form', locals: { f: f } %>
+      </turbo-frame>
     </div>
   </div>
 
- <div data-controller="tabs" data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t">
-  <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl">
-    <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-      <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">アレンジ</a>
-    </li>
-    <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-      <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">ペアリング</a>
-    </li>
-    <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-      <a class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-700 font-semibold no-underline" href="#">コース</a>
-    </li>
-  </ul>
-
-  <!-- タブコンテンツ  -->
-  <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel">
-    <turbo-frame id="arrange-form", data-turbo-acrtion="replace">
-      <%= render partial: 'posts/arrange_form', locals: { f: f } %>
-    </turbo-frame>
-  </div>
-  <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel">
-    <turbo-frame id="pairing-form">
-      <%= render partial: 'posts/pairing_form', locals: { f: f } %>
-    </turbo-frame>
-  </div>
-  <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel">
-    <turbo-frame id="course-form">
-      <%= render partial: 'posts/course_form', locals: { f: f } %>
-    </turbo-frame>
-  </div>
-</div>
-
+  <!-- タグIDを隠しフィールドで送信 -->
+  <%= f.hidden_field :tag_id, id: 'post_tag_id' %>
 
   <div class="action">
-    <%= f.submit class: "btn btn-success" %> 
+    <%= f.submit class: "btn btn-success" %>
   </div>
 <% end %>
