@@ -10,10 +10,15 @@
   </div>
 
   <h3>コースメニューの追加</h3>
-  <%= f.fields_for :arrange_menus do |am| %>    
+  <%= f.fields_for :course_menus do |cm| %>
     <div>
-      <%= am.label :menu_id, "メニューアイテム" %>
-      <%= am.collection_select :menu_id, Menu.all, :id, :menu_name %>
+      <%= cm.label :course_section_id, "コースセクション" %>
+      <%= cm.collection_select :course_section_id, CourseSection.all, :id, :name %>
+    </div>
+    
+    <div>
+      <%= cm.label :menu_id, "メニューアイテム" %>
+      <%= cm.collection_select :menu_id, Menu.all, :id, :menu_name %>
     </div>
 
   <% end %>

@@ -18,6 +18,8 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :pairing_menus, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :post_tags, allow_destroy: true
 
+  validates :only_one_menu
+  
   # メニューの合計値計算
   def total_price
     course_related_menus.sum(:price) + arrange_related_menus.sum(:price) + pairing_related_menus.sum(:price)
@@ -30,6 +32,14 @@ class Post < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["course_related_menus", "arrange_related_menus", "pairing_related_menus", "tags"]
+  end
+
+  # カスタムバリデーション：各メニュー一つのみしか登録できないようにする
+  def only_one_menu
+    menu_count = [arrange_menus.count, pairing_menus.count, course_menus.count].sum
+    if menu_count > 1
+      errors.add(:base, "アレンジ、ペアリング、コースのいずれか一つだけを選択してください。")
+    end
   end
   
 end
