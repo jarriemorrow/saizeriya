@@ -13,13 +13,11 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   accepts_nested_attributes_for :post_menus, allow_destroy: true, reject_if: :all_blank
-  accepts_nested_attributes_for :course_menus, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :course_menus, allow_destroy: true
   accepts_nested_attributes_for :arrange_menus, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :pairing_menus, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :post_tags, allow_destroy: true
-
-  validate :only_one_menu
-
+  
   # メニューの合計値計算
   def total_price
     Menu.joins(:course_menus)
@@ -42,14 +40,6 @@ class Post < ApplicationRecord
     ["course_related_menus", "arrange_related_menus", "pairing_related_menus", "tags"]
   end
 
-  # 各メニュー１つのみしか登録できないようにする
-  def only_one_menu
-    menu_count = [arrange_menus.count, pairing_menus.count, course_menus.count].sum
-    if menu_count > 1
-      errors.add(:base, "アレンジ、ペアリング、コースのいずれか一つだけを選択してください。")
-    end
-  end
-  
   def add_tag(tag_id)
     if tag_id.present?
       tag = Tag.find(tag_id)
