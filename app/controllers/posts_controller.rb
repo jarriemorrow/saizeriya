@@ -25,7 +25,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:course_menus, :arrange_menus, :pairing_menus, :post_tags, :tags, :likes, course_menus: :menu, arrange_menus: :menu, pairing_menus: :menu).find(params[:id])
+    @post = Post.includes(:post_tags, :tags, :likes)
+    .left_joins(:course_menus, :arrange_menus, :pairing_menus)
+    .find(params[:id])
+
   end
   
   def edit; end
