@@ -8,3 +8,13 @@
     <%= cocooned_add_item_link 'Add an item', f, :arrange_menus, layout: false, class: "btn btn-primary" %>
   <% end %>
 </div>
+
+<div>
+  <%= f.label :recipe_name, "レシピ名" %>
+  <%= f.text_field :recipe_name %>
+</div>
+
+<div>
+  <%= f.label :body, "説明" %>
+  <%= f.text_area :body %>
+</div>
