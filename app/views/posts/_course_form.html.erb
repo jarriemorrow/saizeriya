@@ -1,5 +1,19 @@
+<div class="form-group" id="menu-fields-container">
+  <% @course_sections.each do |course_section| %>
+    <% # Find or build course_menu for the current course_section %>
+    <% course_menu = @post.course_menus.find { |cm| cm.course_section_id == course_section.id } || @post.course_menus.build(course_section_id: course_section.id) %>
+    <%= f.fields_for :course_menus, course_menu do |cm| %>
+      <div class="menu-field">
+        <%= cm.hidden_field :course_section_id, value: course_section.id %>
+        <%= cm.label :menu_id, course_section.name %>
+        <%= cm.collection_select :menu_id, Menu.all, :id, :menu_name, { include_blank: true }, { class: "form-control" } %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
 <div>
-  <%= f.label :recipe_name, "コース名" %>
+  <%= f.label :recipe_name, "アレンジレシピ名" %>
   <%= f.text_field :recipe_name %>
 </div>
 
