@@ -21,7 +21,7 @@
         </div>
         <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="pairing">
           <turbo-frame id="pairing-form">
-            <%= render partial: 'posts/pairing_form', locals: { f: f } %>
+            <%= render partial: 'posts/pairing_form', locals: { f: f } %>　
           </turbo-frame>
         </div>
         <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
@@ -31,10 +31,6 @@
         </div>
       </div>
 
-      <!-- タグIDを隠しフィールドで送信 -->
-      <%= f.fields_for :post_tags do |pt| %>
-        <%= pt.hidden_field :tag_id, id: 'post_tag_id' %>
-      <% end %>
       <div class="action">
         <%= f.submit class: "btn btn-success" %>
       </div>

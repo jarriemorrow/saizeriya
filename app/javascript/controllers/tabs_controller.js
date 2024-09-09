@@ -2,38 +2,57 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static classes = [ "activeTab", "inactiveTab" ]
-  static targets = ['tab', 'panel', 'select', 'form']
+  static targets = ['tab', 'panel', 'select']
   static values = {
-    index: { type: Number, default: null },
+    index: 0,
     updateAnchor: Boolean,
     scrollToAnchor: Boolean,
     scrollActiveTabIntoView: Boolean
+  }
+
+  initialize() {
+    if (this.anchor) this.indexValue = this.tabTargets.findIndex((tab) => tab.id === this.anchor)
   }
 
   connect() {
     this.showTab()
   }
 
+  // Changes to the clicked tab
   change(event) {
     event.preventDefault();
-    const target = event.currentTarget;
-    const tagId = target.dataset.tab; // タブIDを取得
+    if (event.currentTarget.tagName === "SELECT") {
+      this.indexValue = event.currentTarget.selectedIndex
 
-    // フォームの隠しフィールドにタグIDを設定
-    const hiddenField = document.getElementById('post_tag_id');
-    if (hiddenField) {
-      hiddenField.value = tagId;
-    }
+    // If target specifies an index, use that
+    } else if (event.currentTarget.dataset.index) {
+      this.indexValue = event.currentTarget.dataset.index
 
-    if (target.tagName === "SELECT") {
-      this.indexValue = target.selectedIndex;
-    } else if (target.dataset.index) {
-      this.indexValue = target.dataset.index;
-    } else if (target.dataset.id) {
-      this.indexValue = this.tabTargets.findIndex((tab) => tab.id == target.dataset.id);
+    // If target specifies an id, use that
+    } else if (event.currentTarget.dataset.id) {
+      this.indexValue = this.tabTargets.findIndex((tab) => tab.id == event.currentTarget.dataset.id)
+
+    // Otherwise, use the index of the current target
     } else {
-      this.indexValue = this.tabTargets.indexOf(target);
+      this.indexValue = this.tabTargets.indexOf(event.currentTarget)
     }
+
+  }
+
+  nextTab() {
+    this.indexValue = Math.min(this.indexValue + 1, this.tabsCount - 1)
+  }
+
+  previousTab() {
+    this.indexValue = Math.max(this.indexValue - 1, 0)
+  }
+
+  firstTab() {
+    this.indexValue = 0
+  }
+
+  lastTab() {
+    this.indexValue = this.tabsCount - 1
   }
 
   indexValueChanged() {
@@ -44,15 +63,16 @@ export default class extends Controller {
         activeIndex: this.indexValue
       }
     })
-
+    // Update URL with the tab ID if it has one
+    // This will be automatically selected on page load
     if (this.updateAnchorValue) {
-      const newTabId = this.tabTargets[this.indexValue].id
-      if (this.scrollToAnchorValue) {
-        location.hash = newTabId
+      const new_tab_id = this.tabTargets[this.indexValue].id // Grab the id from the newly activated tab
+      if (this.scrollToAnchorValue){
+        location.hash = new_tab_id // Use location.hash to change the URL with scrolling
       } else {
-        const currentUrl = window.location.href
-        const newUrl = currentUrl.split('#')[0] + '#' + newTabId
-        history.replaceState({}, document.title, newUrl)
+        const currentUrl = window.location.href // Get the current URL
+        const newUrl = currentUrl.split('#')[0] + '#' + new_tab_id // Create a new URL with the updated ID
+        history.replaceState({}, document.title, newUrl) // Use history.replaceState to change the URL without scrolling
       }
     }
   }
@@ -64,10 +84,9 @@ export default class extends Controller {
       if (index === this.indexValue) {
         panel.classList.remove('hidden')
         tab.ariaSelected = 'true'
-        tab.dataset.active = true
+        tab.dataset.active =  true
         if (this.hasInactiveTabClass) tab?.classList?.remove(...this.inactiveTabClasses)
         if (this.hasActiveTabClass) tab?.classList?.add(...this.activeTabClasses)
-        this.resetForm(panel)
       } else {
         panel.classList.add('hidden')
         tab.ariaSelected = null
@@ -81,23 +100,14 @@ export default class extends Controller {
       this.selectTarget.selectedIndex = this.indexValue
     }
 
-    if (this.scrollActiveTabIntoViewValue) {
-      this.scrollToActiveTab()
-    }
+    if (this.scrollActiveTabIntoViewValue) this.scrollToActiveTab()
   }
 
-  resetForm(panel) {
-    const form = panel.querySelector('form');
-    if (form) {
-      form.reset();
-    }
-  }
-
+  // If tabs have horizontal scrolling, the active tab may be out of sight.
+  // Make sure the active tab is visible by scrolling it into the view.
   scrollToActiveTab() {
     const activeTab = this.element.querySelector('[aria-selected]')
-    if (activeTab) {
-      activeTab.scrollIntoView({ inline: 'center' })
-    }
+    if (activeTab) activeTab.scrollIntoView({ inline: 'center', })
   }
 
   get tabsCount() {
