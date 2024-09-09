@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_many :post_menus, dependent: :destroy
   has_many :course_menus, dependent: :destroy
   has_many :course_related_menus, through: :course_menus, source: :menu
-  has_many :coutse_sectioins, dependent: :destroy
+  has_many :course_sectioins, through: :course_menus, source: :course_section
   has_many :arrange_menus, dependent: :destroy
   has_many :arrange_related_menus, through: :arrange_menus, source: :menu
   has_many :pairing_menus, dependent: :destroy
