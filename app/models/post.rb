@@ -19,6 +19,10 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :pairing_menus, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :post_tags, allow_destroy: true
   
+  validate :only_one_menu_type
+  after_save :assign_tag_based_on_saved_data
+
+
   # メニューの合計値計算
   def total_price
     Menu.joins(:course_menus)
@@ -47,5 +51,28 @@ class Post < ApplicationRecord
       self.tags << tag
     end
   end
-  
+
+  private
+
+  def only_one_menu_type
+    if (arrange_menus.any? && (pairing_menus.any? || course_menus.any?)) ||
+       (pairing_menus.any? && course_menus.any?)
+      errors.add(:base, "You can only select one type of menu.")
+    end
+  end
+
+
+  def assign_tag_based_on_saved_data
+    if arrange_menus.exists?
+      tag = Tag.find_or_create_by(name: 'アレンジ')
+    elsif pairing_menus.exists?
+      tag = Tag.find_or_create_by(name: 'ペアリング')
+    else course_menus.exists?
+      tag = Tag.find_or_create_by(name: 'コース')
+    end
+    unless self.post_tags.exists?(tag_id: tag.id)
+      self.post_tags.create(tag: tag)
+    end
+  end
+
 end
