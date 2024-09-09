@@ -62,26 +62,10 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :recipe_name,
       :body, 
-      post_tags_attributes: [
-        :id, 
-        :tag_id
-      ], 
-      course_menus_attributes: [
-        :id, 
-        :menu_id, 
-        :course_section_id, 
-        :_destroy
-        ],
-      arrange_menus_attributes: [
-        :id,
-        :menu_id,
-        :_destroy
-      ],
-      pairing_menus_attributes: [
-        :id,
-        :menu_id,
-        :_destroy
-      ]
+      post_tags_attributes: [ :id, :tag_id ], 
+      course_menus_attributes: [ :id, :menu_id, :course_section_id, :_destroy ],
+      arrange_menus_attributes: [ :id, :menu_id, :_destroy ],
+      pairing_menus_attributes: [ :id, :menu_id, :_destroy ]
     )
   end
 end
