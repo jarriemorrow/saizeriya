@@ -18,7 +18,6 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      @post.add_tag(params[:post][:tag_id])
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render :new
