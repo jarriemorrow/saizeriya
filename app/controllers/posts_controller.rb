@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = current_user.posts. includes(:course_menus).find(params[:id])
+    @post = current_user.posts.find(params[:id])
     @course_sections = CourseSection.all
   end
 
