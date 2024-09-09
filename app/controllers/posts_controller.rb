@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     @post.course_menus.build
     @post.arrange_menus.build
     @post.pairing_menus.build
+    @course_sections = CourseSection.all
   end
 
   def create
@@ -28,7 +29,6 @@ class PostsController < ApplicationController
     @post = Post.includes(:post_tags, :tags, :likes)
     .left_joins(:course_menus, :arrange_menus, :pairing_menus)
     .find(params[:id])
-
   end
   
   def edit; end
@@ -54,7 +54,8 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = current_user.posts.find(params[:id])
+    @post = current_user.posts. includes(:course_menus).find(params[:id])
+    @course_sections = CourseSection.all
   end
 
   def post_params
