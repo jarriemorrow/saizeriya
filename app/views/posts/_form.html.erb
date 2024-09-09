@@ -2,11 +2,11 @@
   <div class="card w-full shadow-xl mx-auto mb-8 max-w-sm md:max-w-4xl">
 
     <%= form_with model: post, local: false do |f| %>
-      <div data-controller="tabs" data-tabs-active-tab="bg-blue-500 text-white">
-        <ul class="flex border-b border-gray-200">
+      <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl">
+        <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl">
           <% Tag.all.each_with_index do |tag, index| %>
-            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change" data-tab="<%= tag.id %>" data-index="<%= index %>">
-              <a class="inline-block py-2 px-4 text-blue-500 hover:bg-blue-100 hover:text-blue-700 no-underline" href="#">
+            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+              <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">
                 <%= tag.name %>
               </a>
             </li>
@@ -14,14 +14,14 @@
         </ul>
 
         <!-- タブコンテンツ -->
-        <div class="hidden py-4 px-4 border rounded-t-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
+        <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
           <turbo-frame id="arrange-form">
             <%= render partial: 'posts/arrange_form', locals: { f: f } %>
           </turbo-frame>
         </div>
         <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="pairing">
           <turbo-frame id="pairing-form">
-            <%= render partial: 'posts/pairing_form', locals: { f: f } %>　
+            <%= render partial: 'posts/pairing_form', locals: { f: f } %>
           </turbo-frame>
         </div>
         <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
