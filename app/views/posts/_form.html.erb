@@ -1,5 +1,5 @@
 <div class="w-5/6 mx-auto my-4 max-w-screen-xl">
-  <div class="card w-full shadow-xl mx-auto mb-8 max-w-sm md:max-w-4xl">
+  <div class="card w-full mx-auto mb-8 max-w-sm md:max-w-4xl">
 
     <%= form_with model: post, local: false do |f| %>
       <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl">
@@ -18,17 +18,17 @@
         </ul>
 
         <!-- タブコンテンツ -->
-        <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
+        <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl shadow-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
           <turbo-frame id="arrange-form">
             <%= render partial: 'posts/arrange_form', locals: { f: f } %>
           </turbo-frame>
         </div>
-        <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="pairing">
+        <div class="hidden py-4 px-4 border rounded-t-xl rounded-b-xl shadow-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="pairing">
           <turbo-frame id="pairing-form">
             <%= render partial: 'posts/pairing_form', locals: { f: f } %>
           </turbo-frame>
         </div>
-        <div class="hidden py-4 px-4 border rounded-tr rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
+        <div class="hidden py-4 px-4 border rounded-tl-xl rounded-b-xl shadow-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
           <turbo-frame id="course-form">
             <%= render partial: 'posts/course_form', locals: { f: f } %>
           </turbo-frame>
