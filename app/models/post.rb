@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_many :post_menus, dependent: :destroy
   has_many :course_menus, dependent: :destroy
   has_many :course_related_menus, through: :course_menus, source: :menu
-  has_many :course_sectioins, through: :course_menus, source: :course_section
+  has_many :course_sections, through: :course_menus, source: :course_section
   has_many :arrange_menus, dependent: :destroy
   has_many :arrange_related_menus, through: :arrange_menus, source: :menu
   has_many :pairing_menus, dependent: :destroy
@@ -20,8 +20,8 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :post_tags, allow_destroy: true
   
   validate :only_one_menu_type
+  validate :menu_presence
   after_save :assign_tag_based_on_saved_data
-
 
   # メニューの合計値計算
   def total_price
@@ -54,18 +54,24 @@ class Post < ApplicationRecord
     end
   end
 
+  def menu_presence
+    unless arrange_menus.any? || pairing_menus.any? || course_menus.any?
+      errors.add(:base, "At least one menu must be selected.")
+    end
+  end
 
   def assign_tag_based_on_saved_data
     if arrange_menus.exists?
       tag = Tag.find_or_create_by(name: 'アレンジ')
     elsif pairing_menus.exists?
       tag = Tag.find_or_create_by(name: 'ペアリング')
-    else course_menus.exists?
+    elsif course_menus.exists?
       tag = Tag.find_or_create_by(name: 'コース')
+    else
+      tag = Tag.find_or_create_by(name: 'その他')
     end
     unless self.post_tags.exists?(tag_id: tag.id)
       self.post_tags.create(tag: tag)
     end
   end
-
 end
