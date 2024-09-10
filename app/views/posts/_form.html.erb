@@ -6,7 +6,7 @@
         <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl">
           <% Tag.all.each_with_index do |tag, index| %>
             <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-              <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">
+              <a class="inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">
                 <%= tag.name %>
               </a>
             </li>
@@ -14,7 +14,7 @@
         </ul>
 
         <!-- タブコンテンツ -->
-        <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
+        <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl bg-emerald-100" data-tabs-target="panel" data-tab="arrange">
           <turbo-frame id="arrange-form">
             <%= render partial: 'posts/arrange_form', locals: { f: f } %>
           </turbo-frame>
