@@ -2,16 +2,18 @@
   <div class="card w-full shadow-xl mx-auto mb-8 max-w-sm md:max-w-4xl">
 
     <%= form_with model: post, local: false do |f| %>
-      <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl">
-        <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl">
-          <% Tag.all.each_with_index do |tag, index| %>
-            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-              <a class="inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">
-                <%= tag.name %>
-              </a>
-            </li>
-          <% end %>
-        </ul>
+     <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl">
+    <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl">
+      <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+        <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">アレンジメニュー</a>
+      </li>
+      <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+        <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">ペアリングメニュー</a>
+      </li>
+      <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+        <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">コースメニュー</a>
+      </li>
+    </ul>
 
         <!-- タブコンテンツ -->
         <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
@@ -29,11 +31,11 @@
             <%= render partial: 'posts/course_form', locals: { f: f } %>
           </turbo-frame>
         </div>
+
+
       </div>
 
-      <div class="action">
-        <%= f.submit class: "btn btn-success" %>
-      </div>
+
     <% end %>
   </div>
 </div>
