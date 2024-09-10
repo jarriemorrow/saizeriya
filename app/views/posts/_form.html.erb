@@ -2,18 +2,20 @@
   <div class="card w-full shadow-xl mx-auto mb-8 max-w-sm md:max-w-4xl">
 
     <%= form_with model: post, local: false do |f| %>
-     <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl">
-    <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl">
-      <li class="-mb-px mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-        <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">アレンジメニュー</a>
-      </li>
-      <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-        <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">ペアリングメニュー</a>
-      </li>
-      <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-        <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl" href="#">コースメニュー</a>
-      </li>
-    </ul>
+      <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl">
+        
+        <!-- フレックスボックスを使用してタブを均等に配置 -->
+        <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl space-x-1">
+          <li class="flex-1" data-tabs-target="tab" data-action="click->tabs#change">
+            <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl text-center text-sm w-full border-none" href="#">アレンジ</a>
+          </li>
+          <li class="flex-1" data-tabs-target="tab" data-action="click->tabs#change">
+            <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl text-center text-sm w-full border-none" href="#">ペアリング</a>
+          </li>
+          <li class="flex-1" data-tabs-target="tab" data-action="click->tabs#change">
+            <a class="bg-white inline-block py-2 px-4 font-bold no-underline rounded-t-xl text-center text-sm w-full border-none" href="#">コース</a>
+          </li>
+        </ul>
 
         <!-- タブコンテンツ -->
         <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="arrange">
@@ -26,16 +28,13 @@
             <%= render partial: 'posts/pairing_form', locals: { f: f } %>
           </turbo-frame>
         </div>
-        <div class="hidden py-4 px-4 border rounded-tr-xl rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
+        <div class="hidden py-4 px-4 border rounded-tr rounded-b-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
           <turbo-frame id="course-form">
             <%= render partial: 'posts/course_form', locals: { f: f } %>
           </turbo-frame>
         </div>
 
-
       </div>
-
-
     <% end %>
   </div>
 </div>
