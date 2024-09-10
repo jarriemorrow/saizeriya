@@ -1,5 +1,5 @@
 <%= cocooned_item do %>
   <%= f.label :menu_id, "メニュー" %><br>
-  <%= f.collection_select :menu_id, Menu.all, :id, :menu_name, { include_blank: true }, { class: "form-control"} %>
+  <%= f.collection_select :menu_id, Menu.all, :id, :menu_name, { include_blank: true }, { class: "orm-control flex max-w-full break-words whitespace-normal"} %>
   <%= cocooned_remove_item_button '削除', f , class: "btn btn-error" %>
 <% end %>
