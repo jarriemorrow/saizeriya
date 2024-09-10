@@ -68,7 +68,7 @@ class Post < ApplicationRecord
     elsif course_menus.exists?
       tag = Tag.find_or_create_by(name: 'コース')
     end
-    unless self.post_tags.exists?(tag_id: tag.id)
+    if tag && !self.post_tags.exists?(tag_id: tag.id)
       self.post_tags.create(tag: tag)
     end
   end
