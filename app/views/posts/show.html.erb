@@ -21,6 +21,11 @@
         </div>
       </div>
 
+      <!-- 投稿内容 -->
+      <div class="my-4">
+        <div class="divider">レシピタイトル</div>
+        <p><%= @post.recipe_name %></p>
+      </div>  
       <div class="divider">
         <%= @post.tags.map(&:name).join(', ')%>メニュー
       </div>
