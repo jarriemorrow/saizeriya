@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  mount_uploaders :images, PostUploader
+  serialize :images, JSON
   belongs_to :user
   has_many :post_menus, dependent: :destroy
   has_many :course_menus, dependent: :destroy
