@@ -1,7 +1,7 @@
 <div class="w-5/6 mx-auto my-16 max-w-screen-xl">
   <div class="card lg:card-side bg-base-100 shadow-xl">
-    <figure>
-      <%= image_tag @post.user.avatar_url %>
+    <figure class="px-2">
+      <%= image_tag @post.user.avatar_url, style: 'width: 640px; height: 480px;', class: 'rounded-xl' %>
     </figure>
     <div class="card-body">
       <!-- タグといいねボタンのセクション -->
