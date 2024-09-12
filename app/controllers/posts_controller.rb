@@ -61,6 +61,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :recipe_name,
       :body, 
+      images: [],
       post_tags_attributes: [ :id, :tag_id ], 
       course_menus_attributes: [ :id, :menu_id, :course_section_id, :_destroy ],
       arrange_menus_attributes: [ :id, :menu_id, :_destroy ],
