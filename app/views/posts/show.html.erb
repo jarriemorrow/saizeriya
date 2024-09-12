@@ -26,7 +26,7 @@
       <!-- 投稿内容 -->
       <div class="my-4">
         <div class="divider">レシピタイトル</div>
-        <p><%= @post.recipe_name %></p>
+        <p class="font-bold text-center "><%= @post.recipe_name %></p>
       </div>  
       <div class="divider">
         <%= @post.tags.map(&:name).join(', ')%>メニュー
@@ -62,7 +62,7 @@
         <p><%= @post.body %></p>
         <div class="border my-4">
       </div>
-
+ 
       <!-- 編集・削除ボタン -->
       <% if logged_in? && current_user.own?(@post) %>
         <div class="flex gap-4 my-4">
