@@ -3,7 +3,7 @@
     <div class="flex justify-start">
       <div class="avatar m-4">
         <div class="w-12 mask mask-squircle">
-          <%= image_tag post.user.avatar_url %>
+          <%= image_tag post.first_image_url, alt: 'First Image' if post.first_image_url.present? %>
         </div>
       </div>
       <div class="my-auto">
