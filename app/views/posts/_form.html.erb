@@ -1,7 +1,7 @@
 <div class="w-5/6 mx-auto my-4 max-w-screen-xl">
   <div class="card w-full mx-auto mb-8 max-w-sm md:max-w-4xl">
 
-    <%= form_with model: post, local: false do |f| %>
+    <%= form_with model: post, local: false, html: { multipart: true } do |f| %>
       <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl">
         <ul class="list-reset flex w-full mx-auto max-w-sm md:max-w-4xl space-x-1">
           <li class="flex-1" data-tabs-target="tab" data-action="click->tabs#change">
@@ -39,6 +39,10 @@
           <div>
             <%= f.label :body, "説明" %>
             <%= f.text_area :body %>
+          </div>
+          <div>
+            <%= f.label :images, '画像選択' %>
+            <%= f.file_field :images, multiple: true, class: "form-control file-input file-input-sm file-input-bordered w-full mb-3" %>
           </div>
           <div class="action">
             <%= f.submit class: "btn btn-success" %>
