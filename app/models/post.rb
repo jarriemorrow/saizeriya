@@ -46,6 +46,10 @@ class Post < ApplicationRecord
     ["course_related_menus", "arrange_related_menus", "pairing_related_menus", "tags"]
   end
 
+  def first_image_url
+    images.first.url if images.present?
+  end
+
   private
 
   def only_one_menu_type
