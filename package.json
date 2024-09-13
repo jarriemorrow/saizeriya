@@ -15,8 +15,8 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
-    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.sass.scss -o ./app/assets/builds/application.css --minify",
     "build:all": "yarn run build && yarn run build:css",
-    "watch:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --watch"
+    "watch:css": "tailwindcss -i ./app/assets/stylesheets/application.sass.scss -o ./app/assets/builds/application.css --watch"
   }
 }
