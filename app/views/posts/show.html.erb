@@ -1,10 +1,17 @@
 <div class="w-5/6 mx-auto my-16 max-w-screen-xl">
   <div class="card lg:card-side bg-base-100 shadow-xl">
-    <figure class="px-2">
-      <% @post.images.each do |image| %>
-        <%= image_tag image.url, style: 'width: 640px; height: 480px;', class: 'rounded-xl' %>
-      <% end %>
-    </figure>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <% @post.images.each do |image| %>
+            <div class="swiper-slide">
+              <%= image_tag image.url, class: 'rounded-xl', style: 'width: 640px; height: 480px;' %>
+            </div>
+          <% end %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
     <div class="card-body">
       <!-- タグといいねボタンのセクション -->
       <div class="flex justify-between items-end">
