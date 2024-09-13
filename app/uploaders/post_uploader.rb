@@ -15,7 +15,7 @@ class PostUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-    'no-image.svg'
+    'no_image.svg'
   end
 
   # Process files as they are uploaded:
@@ -33,7 +33,7 @@ class PostUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg gif png heic webp)
+    %w(jpg jpeg gif png heic webp svg)
   end
 
   # Override the filename of the uploaded files:
