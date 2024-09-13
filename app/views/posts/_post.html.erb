@@ -3,7 +3,7 @@
     <div class="flex justify-start">
       <div class="avatar m-4">
         <div class="w-12 mask mask-squircle">
-          <%= image_tag post.first_image_url, alt: 'First Image' if post.first_image_url.present? %>
+          <%= image_tag post.user.avatar_url %>
         </div>
       </div>
       <div class="my-auto">
@@ -15,7 +15,7 @@
     </div>
     <div class="mx-4">
       <!-- 投稿画像のイメージが入るところ -->
-      <%= image_tag post.user.avatar_url, class: 'rounded-xl w-72 h-72 object-cover' %>
+      <%= image_tag post.first_image_url, style: 'width: 300px; height: 300px;' %>
     </div>
   <% end %>
   <div class="flex justify-between items-center mt-4 mx-4 mb-4">
