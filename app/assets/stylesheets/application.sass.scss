@@ -9,3 +9,33 @@
     text-stroke:  1px white;
   }
 }
+.swiper {
+  width: 100%;
+  max-width: 640px; /* 最大幅を640pxに固定 */
+  margin: 0 auto; /* スライダー全体を中央揃え */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.swiper-slide img {
+  width: 100%; /* スライドの幅に画像をフィット */
+  max-width: 640px; /* 画像の最大幅を640pxに固定 */
+  height: auto; /* アスペクト比を維持 */
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .swiper {
+    max-width: 100%; /* モバイルなどの小さい画面では100%に拡大 */
+  }
+
+  .swiper-slide img {
+    max-width: 100%; /* 画像の幅を画面にフィットさせる */
+  }
+}
+
