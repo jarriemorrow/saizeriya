@@ -47,7 +47,11 @@ class Post < ApplicationRecord
   end
 
   def first_image_url
-    images.first.url if images.present?
+    if images.present? && images[0].present?
+      images[0].url
+    else
+      PostUploader.new.default_url # デフォルト画像のURLを返す
+    end
   end
 
   private
