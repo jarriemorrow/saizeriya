@@ -1,8 +1,6 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
 import "./controllers"
-import Swiper from 'swiper';
-import 'swiper/swiper-bundle.css';
 import Cocooned from '@notus.sh/cocooned'
 Cocooned.start()
 
