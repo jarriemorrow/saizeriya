@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
-  def find
-    menu = Menu.find_by(menu_no: params[:menu_no])
-    render json: { menu: menu }
+  def search
+    query = params[:query]
+    @menus = Menu.where('menu_name LIKE ?', "%#{query}%").limit(10)
+    render json: @menus
   end
 end

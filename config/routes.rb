@@ -13,4 +13,5 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  get 'search_menus', to: 'menus#search'
 end
