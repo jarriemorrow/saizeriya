@@ -1,10 +1,15 @@
 <div class="form-group" id="menu-fields-container">
+  <p class="mb-4">アレンジメニュー作成に必要なメニュー商品を入力してください</p>
   <%= cocooned_container do %>
     <%= f.fields_for :pairing_menus do |menu_fields| %>
-      <div class="menu-field">
+      <div class="menu-field item-center">
         <%= render 'pairing_menu_fields', f: menu_fields %>
       </div>
     <% end %>
-    <%= cocooned_add_item_link 'Add an item', f, :pairing_menus, layout: false, class: "btn btn-primary" %>
+    <div class="flex justify-center">
+      <%= cocooned_add_item_link '追加', f, :pairing_menus, layout: false,class: "btn btn-primary btn-sm" %>
+    </div>
+    <div class="mt-4 border-dotted border-2 border-t-0 border-gray-400">
+    </div>
   <% end %>
 </div>

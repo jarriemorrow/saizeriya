@@ -1,18 +1,17 @@
 <%= cocooned_item do %>
-  <div data-controller="autocomplete">
-    <%= f.label :menu_id, "メニュー" %><br>
-    <input type="text"
-           data-autocomplete-target="input"
-           data-action="input->autocomplete#search"
-           value="<%= f.object.menu.try(:menu_name) %>"
-           placeholder="メニューを検索..."
-           class="form-control flex max-w-full break-words whitespace-normal" />
-    
-  <ul data-autocomplete-target="results"></ul>
-  
-  <%= hidden_field_tag "#{f.object_name}[menu_id]", f.object.menu_id, data: { autocomplete_target: "hiddenInput" } %>
-  
-  <%= cocooned_remove_item_button '削除', f, class: "btn btn-error" %>
-</div>
+  <div data-controller="autocomplete", class="relative">
+    <div class="flex justify-center items-center space-x-4">
+      <%= f.label :menu_id, "メニュー", class:"mb-1 flex text-xs" %>
+      <input type="text"
+            data-autocomplete-target="input"
+            data-action="input->autocomplete#search"
+            value="<%= f.object.menu.try(:menu_name) %>"
+            placeholder="メニューを検索..."
+            class="mb-2 form-control textarea textarea-bordered textarea-xs w-2/3" />
+      <%= cocooned_remove_item_button '削除', f, class: "btn btn-error btn-xs" %>
+    </div>
+    <ul data-autocomplete-target="results" class="autocomplete-results absolute  dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow hidden"></ul>
 
+    <%= hidden_field_tag "#{f.object_name}[menu_id]", f.object.menu_id, data: { autocomplete_target: "hiddenInput" } %>
+  </div>
 <% end %>
