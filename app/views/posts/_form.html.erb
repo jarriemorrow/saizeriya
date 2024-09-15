@@ -31,7 +31,7 @@
             <%= render partial: 'posts/course_form', locals: { f: f } %>
           </turbo-frame>
         </div>
-        <div class="py-4 px-4  w-full bg-white border border-t-0 rounded-b-xl shadow-xl">
+        <div class="py-4 px-4 text-center item-center w-full bg-white border border-t-0 rounded-b-xl shadow-xl">
           <div class="mb-4">
             <%= f.label :recipe_name, "タイトル", class: "block mb-1 font-semibold" %>
             <%= f.text_field :recipe_name, class:"textarea textarea-bordered textarea-xs w-full max-w-sm" %>
@@ -42,14 +42,17 @@
             <%= f.text_area :body, class:"textarea textarea-bordered textarea-xs w-full max-w-sm", placeholder:"作り方やコメントなどを入力してください" %>
           </div>
 
-          <div class="mb-4">
-            <%= f.label :images, '画像選択', class: "block mb-1 font-semibold" %>
-            <%= f.file_field :images, multiple: true, class: "form-control file-input file-input-sm w-full max-w-sm file-input-bordered mb-3" %>
+          <div class="mb-4 flex justify-center">
+            <div class="w-full max-w-sm">
+              <%= f.label :images, '画像選択', class: "block mb-1 font-semibold" %>
+              <%= f.file_field :images, multiple: true, class: "form-control file-input file-input-sm w-full file-input-bordered mb-3" %>
+            </div>
           </div>
           <div class="action flex justify-center">
             <%= f.submit class: "btn btn-success" %>
           </div>
         </div>
+
       </div>
     <% end %>
   </div>
