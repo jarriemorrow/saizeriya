@@ -26,16 +26,12 @@ class Post < ApplicationRecord
 
   # メニューの合計値計算
   def total_price
-    Menu.joins(:course_menus)
-        .where(course_menus: { post_id: id })
-        .sum(:price) +
-    Menu.joins(:arrange_menus)
-        .where(arrange_menus: { post_id: id })
-        .sum(:price) +
-    Menu.joins(:pairing_menus)
-        .where(pairing_menus: { post_id: id })
-        .sum(:price)
+    course_menu_sum = CourseMenu.joins(:menu).where(post_id: id).sum('menus.price')
+    arrange_menu_sum = ArrangeMenu.joins(:menu).where(post_id: id).sum('menus.price')
+    pairing_menu_sum = PairingMenu.joins(:menu).where(post_id: id).sum('menus.price')
+    course_menu_sum + arrange_menu_sum + pairing_menu_sum
   end
+  
 
   # 検索可能な属性を指定
   def self.ransackable_attributes(auth_object = nil)
