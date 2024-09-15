@@ -34,11 +34,11 @@
         <div class="py-4 px-4  w-full bg-white border border-t-0 rounded-b-xl shadow-xl">
           <div>
             <%= f.label :recipe_name, "アレンジタイトル" %>
-            <%= f.text_field :recipe_name %>
+            <%= f.text_field :recipe_name, class:"textarea textarea-bordered textarea-xs w-full max-w-xs" %>
           </div>
           <div>
             <%= f.label :body, "説明" %>
-            <%= f.text_area :body %>
+            <%= f.text_area :body, class:"textarea textarea-bordered textarea-xs w-full max-w-xs" %>
           </div>
           <div>
             <%= f.label :images, '画像選択' %>
