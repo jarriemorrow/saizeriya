@@ -1,5 +1,18 @@
 <%= cocooned_item do %>
-  <%= f.label :menu_id, "メニュー" %><br>
-  <%= f.collection_select :menu_id, Menu.all, :id, :menu_name, { include_blank: true }, { class: "orm-control flex max-w-full break-words whitespace-normal"} %>
-  <%= cocooned_remove_item_button '削除', f , class: "btn btn-error" %>
+  <div data-controller="autocomplete">
+    <%= f.label :menu_id, "メニュー" %><br>
+    <input type="text"
+           data-autocomplete-target="input"
+           data-action="input->autocomplete#search"
+           value="<%= f.object.menu.try(:menu_name) %>"
+           placeholder="メニューを検索..."
+           class="form-control flex max-w-full break-words whitespace-normal" />
+    
+  <ul data-autocomplete-target="results"></ul>
+  
+  <%= hidden_field_tag "#{f.object_name}[menu_id]", f.object.menu_id, data: { autocomplete_target: "hiddenInput" } %>
+  
+  <%= cocooned_remove_item_button '削除', f, class: "btn btn-error" %>
+</div>
+
 <% end %>
