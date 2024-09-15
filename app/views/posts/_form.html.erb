@@ -16,35 +16,37 @@
         </ul>
 
         <!-- タブコンテンツ -->
-        <div class="hidden py-4 px-4 border border-b-0 rounded-tr-xl shadow-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel">
+        <div class="hidden py-4 px-4 border border-b-0 rounded-tr-xl shadow-xl mx-auto md:max-w-4xl" data-tabs-target="panel">
           <turbo-frame id="arrange-form">
             <%= render partial: 'posts/arrange_form', locals: { f: f } %>
           </turbo-frame>
         </div>
-        <div class="hidden py-4 px-4 border border-b-0 rounded-t-xl shadow-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel"">
+        <div class="hidden py-4 px-4 border border-b-0 rounded-t-xl shadow-xl mx-auto md:max-w-4xl" data-tabs-target="panel"">
           <turbo-frame id="pairing-form">
             <%= render partial: 'posts/pairing_form', locals: { f: f } %>
           </turbo-frame>
         </div>
-        <div class="hidden py-4 px-4 border border-b-0 rounded-tl-xl shadow-xl mx-auto max-w-sm md:max-w-4xl" data-tabs-target="panel" data-tab="course">
+        <div class="hidden py-4 px-4 border border-b-0 rounded-tl-xl shadow-xl mx-auto md:max-w-4xl" data-tabs-target="panel" data-tab="course">
           <turbo-frame id="course-form">
             <%= render partial: 'posts/course_form', locals: { f: f } %>
           </turbo-frame>
         </div>
         <div class="py-4 px-4  w-full bg-white border border-t-0 rounded-b-xl shadow-xl">
-          <div>
-            <%= f.label :recipe_name, "アレンジタイトル" %>
-            <%= f.text_field :recipe_name, class:"textarea textarea-bordered textarea-xs w-full max-w-xs" %>
+          <div class="mb-4">
+            <%= f.label :recipe_name, "タイトル", class: "block mb-1 font-semibold" %>
+            <%= f.text_field :recipe_name, class:"textarea textarea-bordered textarea-xs w-full max-w-sm" %>
           </div>
-          <div>
-            <%= f.label :body, "説明" %>
-            <%= f.text_area :body, class:"textarea textarea-bordered textarea-xs w-full max-w-xs" %>
+
+          <div class="mb-4">
+            <%= f.label :body, "コメント・説明", class: "block mb-1 font-semibold" %>
+            <%= f.text_area :body, class:"textarea textarea-bordered textarea-xs w-full max-w-sm", placeholder:"作り方やコメントなどを入力してください" %>
           </div>
-          <div>
-            <%= f.label :images, '画像選択' %>
-            <%= f.file_field :images, multiple: true, class: "form-control file-input file-input-sm file-input-bordered w-full mb-3" %>
+
+          <div class="mb-4">
+            <%= f.label :images, '画像選択', class: "block mb-1 font-semibold" %>
+            <%= f.file_field :images, multiple: true, class: "form-control file-input file-input-sm max-w- file-input-bordered mb-3" %>
           </div>
-          <div class="action">
+          <div class="action flex justify-center">
             <%= f.submit class: "btn btn-success" %>
           </div>
         </div>
