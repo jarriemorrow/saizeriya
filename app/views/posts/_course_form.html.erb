@@ -3,10 +3,17 @@
     <% @course_sections.each do |course_section| %>
       <% course_menu = @post.course_menus.find { |cm| cm.course_section_id == course_section.id } || @post.course_menus.build(course_section_id: course_section.id) %>
       <%= f.fields_for :course_menus, course_menu do |cm| %>
-        <div class="menu-field max-w-full overflow-hidden break-words">
+        <div data-controller="autocomplete">
           <%= cm.hidden_field :course_section_id %>
           <%= cm.label :menu_id, course_section.name, class: "block truncate" %>
-          <%= cm.collection_select :menu_id, Menu.all, :id, :menu_name, { include_blank: true }, { class: "form-control flex max-w-full break-words whitespace-normal" } %>
+          <input type="text"
+                 data-autocomplete-target="input"
+                 data-action="input->autocomplete#search"
+                 value="<%= cm.object.menu.try(:menu_name) %>"
+                 placeholder="メニューを検索..."
+                 class="form-control flex max-w-full break-words whitespace-normal" />
+          <ul data-autocomplete-target="results"></ul>
+          <%= hidden_field_tag "#{cm.object_name}[menu_id]", cm.object.menu_id, data: { autocomplete_target: "hiddenInput" } %>
         </div>
       <% end %>
     <% end %>
