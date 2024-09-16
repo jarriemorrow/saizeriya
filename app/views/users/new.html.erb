@@ -1,28 +1,37 @@
-<h1>New user</h1>
+<div class="w-5/6 mx-auto my-4 max-w-screen-md">
+  <div class="card w-full mx-auto mb-8 max-w-sm md:max-w-lg shadow-lg rounded-lg bg-white p-6">
+    <h1 class="text-2xl font-bold text-center mb-6">ユーザー登録</h1>
 
-  <%= form_with model: @user, local: true do |f| %>
-    <%= render 'shared/error_messages', object: f.object%>
-    <div class='form-group'>
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    <div class='form-group mb-3'>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
-    <%= f.submit class: 'btn btn-primary' %>
-  <% end %>
+    <%= form_with model: @user, local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
-<br>
+      <div class="form-group mb-4">
+        <%= f.label :name, class: "block text-sm font-semibold mb-1" %>
+        <%= f.text_field :name, class: "form-control input input-bordered w-full" %>
+      </div>
 
-<div>
-  <%= link_to "to_login_page", root_path %>
+      <div class="form-group mb-4">
+        <%= f.label :email, class: "block text-sm font-semibold mb-1" %>
+        <%= f.email_field :email, class: "form-control input input-bordered w-full" %>
+      </div>
+
+      <div class="form-group mb-4">
+        <%= f.label :password, class: "block text-sm font-semibold mb-1" %>
+        <%= f.password_field :password, class: "form-control input input-bordered w-full" %>
+      </div>
+
+      <div class="form-group mb-6">
+        <%= f.label :password_confirmation, class: "block text-sm font-semibold mb-1" %>
+        <%= f.password_field :password_confirmation, class: "form-control input input-bordered w-full" %>
+      </div>
+
+      <div class="flex justify-center">
+        <%= f.submit class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6 text-center">
+    <%= link_to t('defaults.new.to_login_page'), login_path, class: "text-blue-500 underline" %>
+    </div>
+  </div>
 </div>
