@@ -22,6 +22,8 @@ class Post < ApplicationRecord
   
   validate :only_one_menu_type
   validate :menu_presence
+  validates :body, presence: true
+  validates :recipe_name, presence: true
   after_save :assign_tag_based_on_saved_data
 
   # メニューの合計値計算
