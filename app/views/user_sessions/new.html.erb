@@ -1,21 +1,22 @@
-<div class="mt-16">
- <h1>login</h1>
+<div class="w-5/6 mx-auto my-4 max-w-screen-md mt-16">
+  <div class="card w-full mx-auto mb-8 max-w-sm md:max-w-md shadow-lg rounded-lg bg-white p-6">
+    <h1 class="text-2xl font-bold text-center mb-6">ログイン</h1>
 
-  <%= form_with url: login_path, local: true do |f| %>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.text_field :email, class: 'form-control' %>
+    <%= form_with url: login_path, local: true do |f| %>
+      <div class="form-group mb-4">
+        <%= f.label :email, class: "block text-sm font-semibold mb-1" %>
+        <%= f.text_field :email, class: "form-control input input-bordered w-full" %>
+      </div>
+
+      <div class="form-group mb-6">
+        <%= f.label :password, class: "block text-sm font-semibold mb-1" %>
+        <%= f.password_field :password, class: "form-control input input-bordered w-full mb-3" %>
+        <%= f.submit 'ログイン', class: "btn btn-primary w-full" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6 text-center">
+      <%= link_to "トップに戻る", root_path, class: "text-blue-500 underline" %>
     </div>
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control mb-3' %>
-      <%= f.submit 'ログイン',class: 'btn btn-primary' %>
-    </div>
-  <% end %>
-
-  <br>
-
-  <div>
-    <%= link_to "Back to users", root_path %>
   </div>
 </div>
