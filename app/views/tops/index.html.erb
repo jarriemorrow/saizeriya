@@ -1,7 +1,6 @@
 <div class="mx-auto mb-20 text-center">
   <h1 class="text-center">サイゼリヤをもっと楽しむ方法ってない？</h1>
   <%= image_tag 'Raffaellomadonna.svg', class: "mx-auto" %>
-  <% if logged_in? %>
     <div class="flex flex-wrap justify-center md-16 space-y-4 md:space-y-0">
       <div class="card bg-base-200 w-80 shadow-l md:mx-4">
         <div class="card-body">
@@ -23,7 +22,7 @@
         </div>
       </div>
     </div>
-  <% else %>
+  <% unless logged_in? %>
     <div class="mt-10">
       <%= link_to '投稿一覧', posts_path, class: 'btn btn-neutral mt-10 mb-10' %>
       <%= link_to 'ユーザー登録', new_user_path, class: 'block mt-4' %>
