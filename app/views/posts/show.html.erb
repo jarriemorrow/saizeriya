@@ -18,7 +18,7 @@
         <div class="badge badge-primary">
           <%= @post.tags.map(&:name).join(', ') %>メニュー
         </div>
-        <div>
+        <div class="flex item-center">
           <% if logged_in? %>
             <%= render 'like_or_unlike', { post: @post } %>
           <% else %>
