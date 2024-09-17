@@ -1,32 +1,111 @@
 <div class="mx-auto mb-20 text-center">
-  <h1 class="text-center">サイゼリヤをもっと楽しむ方法ってない？</h1>
-  <%= image_tag 'Raffaellomadonna.svg', class: "mx-auto" %>
-    <div class="flex flex-wrap justify-center md-16 space-y-4 md:space-y-0">
-      <div class="card bg-base-200 w-80 shadow-l md:mx-4">
-        <div class="card-body">
-          <h2 class="card-title">１．メニューを作ろう！</h2>
-          <p>ここにメニュー作成の説明を入れます。</p>
-          <div class="card-actions justify-center">
-            <%= link_to '投稿一覧', posts_path, class: 'mb-4 btn w-64 bg-neutral text-white' %>
-          </div>
-        </div>
-      </div>
 
-      <div class="card bg-base-200 w-80 shadow-l md:mx-4">
-        <div class="card-body">
-          <h2 class="card-title">２．みんなで食べよう</h2>
-          <p>ここに何かしらの説明を入れます。</p>
-          <div class="card-actions justify-center">
-            <%= link_to '投稿する', posts_new_path, class: 'mb-4 btn w-64 bg-emerald-500 text-white', data: { turbo: false } %>
+  <!-- ヒーローセクション -->
+  <section class="hero relative bg-cover bg-center h-screen flex flex-col justify-center items-center text-white" style="background-image: url(<%= asset_path('Raffaellomadonna.png') %>);">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 text-center">
+      <h1 class="text-5xl font-bold mb-4 leading-tight"><span class="text-error">サイゼリヤ</span>をもっと楽しもう！</h1>
+      <p class="text-lg mb-6 max-w-2xl mx-auto leading-relaxed">オリジナルメニューを作って、特別な食事をデザインしよう。</p>
+      <%= link_to 'メニューを作成', new_post_path, class: 'btn inline-flex items-center justify-center text-lg bg-green-500 text-white rounded-full shadow-lg', data: {turbo: false} %>
+    </div>
+  </section>
+
+  <!-- 紹介セクション -->
+  <!-- Swiperコンテナ -->
+  <section class="mt-20 max-w-screen-lg mx-auto">
+    <h2 class="text-4xl font-bold mb-8 text-center">3つの楽しみ方</h2>
+  
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <!-- スライド 1 -->
+        <div class="swiper-slide flex justify-center">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 class="text-2xl font-bold text-green-500 mb-4">アレンジメニュー</h3>
+            <p class="text-gray-600 mb-4">定番メニューに一手間加えて、あなただけのオリジナルメニューを作ろう。</p>
+            <%= link_to 'メニューを見る', posts_path, class: 'btn bg-green-500 text-white px-6 py-2 rounded-full shadow', data: {turbo: false} %>
+          </div>
+        </div>
+  
+        <!-- スライド 2 -->
+        <div class="swiper-slide flex justify-center">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 class="text-2xl font-bold text-green-500 mb-4">ペアリングメニュー</h3>
+            <p class="text-gray-600 mb-4">サイゼリヤのメニュー同士を組み合わせて、絶妙なペアリングを楽しもう！</p>
+            <%= link_to 'メニューを見る', posts_path, class: 'btn bg-green-500 text-white px-6 py-2 rounded-full shadow', data: {turbo: false} %>
+          </div>
+        </div>
+  
+        <!-- スライド 3 -->
+        <div class="swiper-slide flex justify-center">
+          <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 class="text-2xl font-bold text-green-500 mb-4">コースメニュー</h3>
+            <p class="text-gray-600 mb-4">サイゼリヤのメニュー同士を組み合わせて、絶妙なペアリングを楽しもう！</p>
+            <%= link_to 'メニューを見る', posts_path, class: 'btn bg-green-500 text-white px-6 py-2 rounded-full shadow', data: {turbo: false} %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  
+  <!-- チャットバブルセクション -->
+  <section class="mt-20 bg-gray-100 py-8 rounded-lg">
+    <h2 class="text-3xl font-bold mb-6 text-center">こんなひとにおすすめです！</h2>
+    <div class="flex flex-col items-center space-y-8">
+      <!-- 左側のチャットバブル -->
+      <div class="chat chat-start w-full max-w-md flex items-center justify-center mb-4">
+        <div class="chat-image avatar mr-4">
+          <div class="w-20 rounded-full">
+            <%= image_tag 'left_angel.png', class: "rounded-xl w-auto" %>
+          </div>
+        </div>
+        <div class="chat-bubble">
+          <h3 class="text-xl font-bold">定番メニューをさらに美味しく食べてみたい！</h3>
+        </div>
+      </div>
+      
+      <!-- 右側のチャットバブル -->
+      <div class="chat chat-end w-full max-w-md flex items-center justify-center mb-4">
+        <div class="chat-bubble">
+          <h3 class="text-xl font-bold">ワンランク上のサイゼリヤを楽しみたい</h3>
+        </div>
+        <div class="chat-image avatar ml-4">
+          <div class="w-20 rounded-full">
+            <%= image_tag 'right_angel.png', class: "rounded-xl w-auto" %>
           </div>
         </div>
       </div>
     </div>
-  <% unless logged_in? %>
-    <div class="mt-10">
-      <%= link_to '投稿一覧', posts_path, class: 'btn btn-neutral mt-10 mb-10' %>
-      <%= link_to 'ユーザー登録', new_user_path, class: 'block mt-4' %>
-      <%= link_to 'ログイン', login_path, class: 'block mt-2' %>
+  </section>
+  
+  <!-- ガイドセクション -->
+  <section class="mt-20 max-w-screen-lg mx-auto">
+    <h2 class="text-4xl font-bold mb-8 text-center">簡単ガイド</h2>
+    <div class="bg-white shadow-lg rounded-lg p-8 text-left">
+      <h3 class="text-2xl font-bold text-green-500 mb-4">メニュー投稿の手順</h3>
+      <ol class="list-decimal list-inside text-gray-600 space-y-2">
+        <li>タブメニューから作成したいメニューを選びます。</li>
+        <li>メニューを自由に組み合わせて、自分だけの最強メニューを作りましょう。</li>
+        <li>最後に投稿して、みんなとシェアしましょう！</li>
+      </ol>
+      <div class="mt-6 text-center">
+        <%= link_to '今すぐ投稿する', new_post_path, class: 'btn bg-green-500 text-white px-8 py-4 rounded-full shadow-lg', data: {turbo: false} %>
+      </div>
     </div>
+  </section>
+
+  <% unless logged_in? %>
+  <!-- ログイン・サインアップボタン -->
+  <section class="mt-20">
+    <div class="flex justify-center space-x-4">
+      <%= link_to 'ユーザー登録', new_user_path, class: 'btn bg-gray-800 text-white px-6 py-2 rounded-full shadow-lg', data: {turbo: false} %>
+      <%= link_to 'ログイン', login_path, class: 'btn bg-gray-600 text-white px-6 py-2 rounded-full shadow-lg', data: {turbo: false} %>
+    </div>
+  </section>
   <% end %>
+
 </div>
