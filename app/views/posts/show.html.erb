@@ -2,11 +2,17 @@
   <div class="card lg:card-side bg-base-100 shadow-xl">
       <div class="swiper">
         <div class="swiper-wrapper">
-          <% @post.images.each do |image| %>
-            <div class="swiper-slide">
-              <%= image_tag image.url, class: 'rounded-xl', style: 'width: 640px; height: 480px;' %>
-            </div>
-          <% end %>
+        <% if @post.images.present? %>
+        <% @post.images.each do |image| %>
+          <div class="swiper-slide">
+           <%= image_tag image.url, class: 'rounded-xl', style: 'max-width: 100%; height: auto;' %>
+          </div>
+         <% end %>
+       <% else %>
+        <div class="swiper-slide">
+          <%= image_tag PostUploader.new.default_url, class: 'rounded-xl', style: 'max-width: 100%; height: auto;' %>
+        </div>
+      <% end %>
         </div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-prev"></div>
