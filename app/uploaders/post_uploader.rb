@@ -1,7 +1,7 @@
 class PostUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :fog
@@ -18,6 +18,20 @@ class PostUploader < CarrierWave::Uploader::Base
     'no_image.png'
   end
 
+  # WebPフォーマットに変換
+  def convert_to_webp
+    manipulate! do |img|
+      img.format('webp')
+      img.quality('80') # 圧縮率
+      img
+    end
+  end
+
+  def filename
+    if original_filename.present?
+      "#{super.chomp(File.extname(super))}.webp"
+    end
+  end
   # Process files as they are uploaded:
   # process scale: [200, 300]
   #
