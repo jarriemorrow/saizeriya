@@ -87,3 +87,4 @@ gem "rails-i18n"
 gem "dotenv-rails"
 gem "fog-aws"
 gem "sassc-rails"
+gem 'mini_magick'
