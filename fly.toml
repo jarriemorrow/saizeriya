@@ -5,6 +5,8 @@
 
 app = 'saizeri'
 primary_region = 'nrt'
+console_command = '/rails/bin/rails console'
+
 
 [build]
   dockerfile = 'Dockerfile'
@@ -19,3 +21,7 @@ primary_region = 'nrt'
 
 [[vm]]
   size = 'shared-cpu-1x'
+
+
+[env]
+  RAILS_ENV = 'production'
