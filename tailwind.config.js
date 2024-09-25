@@ -5,6 +5,7 @@ module.exports = {
     './app/javascript/**/*.js',
     './app/assets/stylesheets/**/*.css'
   ],
+  darkMode: 'class',
   theme: {
     extend: {},
   },
@@ -12,4 +13,7 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('daisyui')
   ],
+  daisyui: {
+    themes: ['light'],
+  },
 }
