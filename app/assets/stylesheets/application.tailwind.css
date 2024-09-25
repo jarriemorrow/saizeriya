@@ -9,6 +9,11 @@
   }
 }
 
+footer {
+  position: absolute; /* または absolute */
+  z-index: 10; /* 数値は適宜調整 */
+}
+
 .swiper {
   width: 100%;
   max-width: 640px; /* 最大幅を640pxに固定 */
