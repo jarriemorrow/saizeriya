@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post "oauth/callback" => "oauths#callback"
+  get "oauth/callback" => "oauths#callback" 
+  get "oauth/:provider" => "oauths#oauth", as: :auth_at_provider
+    
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   get 'posts/index'
@@ -17,4 +21,5 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   get 'search_menus', to: 'menus#search'
   resources :password_resets, only: [:create, :edit, :update, :new]
+
 end
