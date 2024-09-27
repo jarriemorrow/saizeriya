@@ -4,11 +4,20 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true)
-               .includes(:user, :likes)
-               .order(created_at: :desc)
-               .page(params[:page])
+    if params[:q] && params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all]
+      keywords = params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all].split(/[[:space:]]+/)
+      @posts = Post.search_multiple_keywords(keywords)
+                   .includes(:user, :likes)
+                   .order(created_at: :desc)
+                   .page(params[:page])
+    else
+      @posts = @q.result(distinct: true)
+                 .includes(:user, :likes)
+                 .order(created_at: :desc)
+                 .page(params[:page])
+    end
   end
+  
 
   def new
     @post = Post.new
@@ -52,11 +61,22 @@ class PostsController < ApplicationController
 
   def likes
     @q = current_user.like_posts.ransack(params[:q])
-    @like_posts = @q.result(distinct: true)
-                    .includes(:user)
-                    .order(created_at: :desc)
-                    .page(params[:page])
+  
+    if params[:q] && params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all].present?
+      keywords = params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all].split(/[[:space:]]+/)
+      
+      @like_posts = current_user.like_posts.includes(:post)
+                                .merge(Post.search_multiple_keywords(keywords))
+                                .order(created_at: :desc)
+                                .page(params[:page])
+    else
+      @like_posts = @q.result(distinct: true)
+                      .includes(:post)
+                      .order(created_at: :desc)
+                      .page(params[:page])
+    end
   end
+  
 
   private
 
