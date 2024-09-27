@@ -1,5 +1,5 @@
 <div class="mx-auto text-center">
-  <%= render 'shared/search_form', q: @q %>
+  <%= render 'shared/search_form', q: @q, url: likes_posts_path %>
   <div>
     <% if @like_posts.present? %>
       <%= render @like_posts %>

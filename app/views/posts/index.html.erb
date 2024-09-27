@@ -1,6 +1,6 @@
 <div class="mt-4 mx-auto text-center">
   <div>
-    <%= render 'shared/search_form', q: @q %>
+    <%= render 'shared/search_form', q: @q, url: posts_path %>
   </div>
   <div class="my-3 mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 max-w-5xl">
      <%= render @posts %>
