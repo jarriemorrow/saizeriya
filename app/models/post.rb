@@ -48,15 +48,13 @@ class Post < ApplicationRecord
   def self.search_multiple_keywords(keywords)
     return all if keywords.blank?
     ransack_conditions = keywords.map do |keyword|
-      {
+      Post.ransack(
         recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont: keyword
-      }
+      ).result(distinct: true)
     end
   
-    # AND条件の検索
-    ransack_query = ransack(ransack_conditions.reduce(&:merge))
-    # 結果を返す
-    ransack_query.result(distinct: true)
+    ransack_query = ransack_conditions.reduce(&:merge)
+    ransack_query
   end
   
   def first_image_url
