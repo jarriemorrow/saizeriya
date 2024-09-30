@@ -6,7 +6,6 @@
     "@hotwired/turbo-rails": "^8.0.4",
     "@notus.sh/cocooned": "^2.2.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@yaireo/tagify": "^4.31.3",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.10",
     "esbuild": "^0.23.0",
