@@ -7,11 +7,11 @@ import { application } from "./application"
 import AutocompleteController from "./autocomplete_controller"
 application.register("autocomplete", AutocompleteController)
 
-import AutocompleteMenuController from "./autocomplete_menu_controller"
-application.register("autocomplete-menu", AutocompleteMenuController)
-
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import SearchController from "./search_controller"
+application.register("search", SearchController)
 
 import TabsController from "./tabs_controller"
 application.register("tabs", TabsController)
