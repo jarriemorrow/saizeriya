@@ -108,3 +108,49 @@ footer {
   background-color: #e0e0e0; /* ホバー時の背景色 */
   color: #333; /* ホバー時の文字色 */
 }
+
+
+.search-results {
+  border: 1px solid #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: #fff; /* 背景色を白に設定 */
+  position: absolute; /* 絶対位置指定 */
+  z-index: 10; /* 他の要素の上に表示 */
+  width: 100%; /* 入力フィールドと同じ幅 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* シャドウを追加 */
+  border-radius: 4px; /* 角を丸くする */
+  margin-top: 0.2rem; /* 入力フィールドとの間隔 */
+}
+
+.search-item {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.search-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* search results container */
+[data-search-target="results"] {
+  position: absolute; /* 絶対位置指定 */
+  top: 100%; /* 入力フィールドの下に配置 */
+  left: 0; /* 入力フィールドと同じ幅に配置 */
+}
+
+/* search result item */
+[data-search-target="results"] li {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+/* Hover state */
+[data-search-target="results"] li:hover {
+  background-color: #e0e0e0; /* ホバー時の背景色 */
+  color: #333; /* ホバー時の文字色 */
+}
+
+.search-results.show {
+  display: block; /* 結果がある場合に表示する */
+}
