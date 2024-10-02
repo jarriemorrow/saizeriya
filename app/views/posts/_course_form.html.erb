@@ -1,25 +1,23 @@
 <div class="form-group" id="menu-fields-container">
   <p class="mb-4">コースメニュー作成に必要なメニュー商品を入力してください。</p>
-  <% if @course_sections.present? %>
-    <% @course_sections.each do |course_section| %>
-      <% course_menu = @post.course_menus.find { |cm| cm.course_section_id == course_section.id } || @post.course_menus.build(course_section_id: course_section.id) %>
-      <%= f.fields_for :course_menus, course_menu do |cm| %>
-        <div data-controller="autocomplete" class="relative">
-          <div class="flex justify-center items-center space-x-4">
-            <%= cm.hidden_field :course_section_id %>
-            <%= cm.label :menu_id, course_section.name, class: "block text-sm text-center mb-1 w-1/3" %>
-            <input type="text"
-                   data-autocomplete-target="input"
-                   data-action="input->autocomplete#search"
-                   value="<%= cm.object.menu.try(:menu_name) %>"
-                   placeholder="メニューを検索..."
-                   class="form-control textarea textarea-bordered textarea-xs flex-grow mb-2" />
-          </div>
-          <ul data-autocomplete-target="results" class="autocomplete-results absolute dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow hidden"></ul>
-          <%= hidden_field_tag "#{cm.object_name}[menu_id]", cm.object.menu_id, data: { autocomplete_target: "hiddenInput" } %>
+  <% @course_sections.each do |course_section| %>
+    <% course_menu = @post.course_menus.find { |cm| cm.course_section_id == course_section.id } || @post.course_menus.build(course_section_id: course_section.id) %>
+    <%= f.fields_for :course_menus, course_menu do |cm| %>
+      <div data-controller="autocomplete" class="relative">
+        <div class="flex justify-center items-center space-x-4">
+          <%= cm.hidden_field :course_section_id %>
+          <%= cm.label :menu_id, course_section.name, class: "block text-sm text-center mb-1 w-1/3" %>
+          <input type="text"
+                 data-autocomplete-target="input"
+                 data-action="input->autocomplete#search"
+                 value="<%= cm.object.menu.try(:menu_name) %>"
+                 placeholder="メニューを検索..."
+                 class="form-control textarea textarea-bordered textarea-xs flex-grow mb-2" />
         </div>
-      <% end %>
+        <ul data-autocomplete-target="results" class="autocomplete-results absolute dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow hidden"></ul>
+        <%= hidden_field_tag "#{cm.object_name}[menu_id]", cm.object.menu_id, data: { autocomplete_target: "hiddenInput" } %>
+      </div>
     <% end %>
-    <div class="mt-4 border-dotted border-2 border-t-0 border-gray-400"></div>
   <% end %>
+  <div class="mt-4 border-dotted border-2 border-t-0 border-gray-400"></div>
 </div>
