@@ -5,6 +5,14 @@ export default class extends Controller {
 
   connect() {
     console.log("SearchController connected");
+
+    // ドキュメント全体のクリックを監視する
+    document.addEventListener('click', this.handleClickOutside.bind(this));
+  }
+
+  disconnect() {
+    // コントローラーが切断されたときにイベントリスナーを削除する
+    document.removeEventListener('click', this.handleClickOutside.bind(this));
   }
 
   async search(event) {
@@ -70,5 +78,12 @@ export default class extends Controller {
   clearResults() {
     this.resultsTarget.innerHTML = ''; // リストを空にする
     this.resultsTarget.classList.add('hidden'); // 非表示にする
+  }
+
+  // 枠外クリック時の処理
+  handleClickOutside(event) {
+    if (!this.element.contains(event.target)) {
+      this.clearResults(); // 枠外がクリックされた場合、結果リストを閉じる
+    }
   }
 }
