@@ -1,4 +1,15 @@
 <%= search_form_for q, url: url, method: :get do |f| %>
-  <%= f.search_field :recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all, class: 'input input-bordered w-auto', placeholder: 'スペース区切りでキーワード検索' %>
-  <%= f.submit '検索', class: 'btn btn-primary' %>
+  <div data-controller="search" class="relative">
+    <input type="text" 
+          name="q[recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all]" 
+          data-search-target="input"
+          data-action="input->search#search"
+          value="<%= params.dig(:q, 'recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all') %>"
+          placeholder="スペース区切りでキーワード検索" 
+          class="input input-bordered w-auto" />
+
+    <ul data-search-target="results" class="search-results absolute dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow hidden"></ul>
+  </div>
+    <%= f.submit '検索', class: 'btn btn-primary' %>
+
 <% end %>
