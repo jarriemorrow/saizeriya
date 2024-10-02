@@ -9,13 +9,17 @@ export default class extends Controller {
 
   async search(event) {
     console.log("Search event triggered");
-    const query = this.inputTarget.value.trim();
-    if (query === "") {
+
+    // スペースで区切ってキーワードを取得
+    const keywords = this.inputTarget.value.trim().split(/[\s\u3000]+/).filter(Boolean);
+    if (keywords.length === 0) {
       this.clearResults();
       return;
     }
 
-    const response = await fetch(`/search_menus?query=${encodeURIComponent(query)}`);
+    // 各キーワードで検索を行うためのクエリを生成
+    const queries = keywords.map(query => encodeURIComponent(query)).join("&query=");
+    const response = await fetch(`/search_menus?query=${queries}`);
     if (response.ok) {
       const results = await response.json();
       this.displayResults(results);
@@ -48,8 +52,19 @@ export default class extends Controller {
   }
 
   selectResult(result) {
-    this.inputTarget.value = result.menu_name; // 選択した値を入力フィールドに反映
+    // 現在の入力内容を取得
+    const currentValue = this.inputTarget.value.trim();
+    const keywords = currentValue.split(/[\s\u3000]+/); // スペースで区切る
+    keywords[keywords.length - 1] = result.menu_name; // 最後のキーワードを選択したメニュー名に置き換え
+
+    // 結合して入力フィールドに反映
+    this.inputTarget.value = keywords.join(" ") + " "; // 最後にスペースを追加
+
     this.clearResults(); // リストをクリアして非表示にする
+
+    // カーソルを最後に移動
+    this.inputTarget.focus();
+    this.inputTarget.setSelectionRange(this.inputTarget.value.length, this.inputTarget.value.length);
   }
 
   clearResults() {
