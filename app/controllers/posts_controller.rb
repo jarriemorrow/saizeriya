@@ -5,7 +5,12 @@ class PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
     if params[:q] && params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all]
+      # スペースで区切ってキーワードを分割
       keywords = params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all].split(/[[:space:]]+/)
+  
+      # キーワードが空でないことを確認
+      keywords = keywords.map(&:strip).reject(&:empty?)
+  
       @posts = Post.search_multiple_keywords(keywords)
                    .includes(:user, :likes)
                    .order(created_at: :desc)
@@ -65,13 +70,13 @@ class PostsController < ApplicationController
     if params[:q] && params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all].present?
       keywords = params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all].split(/[[:space:]]+/)
       
-      @like_posts = current_user.like_posts.includes(:post)
+      @like_posts = current_user.like_posts.includes(:user)
                                 .merge(Post.search_multiple_keywords(keywords))
                                 .order(created_at: :desc)
                                 .page(params[:page])
     else
       @like_posts = @q.result(distinct: true)
-                      .includes(:post)
+                      .includes(:user)
                       .order(created_at: :desc)
                       .page(params[:page])
     end
