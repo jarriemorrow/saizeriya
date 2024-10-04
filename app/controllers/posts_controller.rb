@@ -12,22 +12,31 @@ class PostsController < ApplicationController
       keywords = keywords.map(&:strip).reject(&:empty?)
   
       @posts = Post.search_multiple_keywords(keywords)
-                   .includes(:user, :likes)
-                   .order(created_at: :desc)
-                   .page(params[:page])
+        .includes(:user, :likes)
+        .order(created_at: :desc)
+        .page(params[:page])
     else
       @posts = @q.result(distinct: true)
-                 .includes(:user, :likes)
-                 .order(created_at: :desc)
-                 .page(params[:page])
+        .includes(:user, :likes)
+        .order(created_at: :desc)
+        .page(params[:page])
     end
   end
   
+
+  def show
+    @post = Post.includes(:post_tags, :tags, :likes, :course_menus, :arrange_menus, :pairing_menus)
+      .find(params[:id])
+  end
 
   def new
     @post = Post.new
     build_associations(@post)
     @course_sections = CourseSection.all
+  end
+
+  def edit
+    build_associations(@post)
   end
 
   def create
@@ -39,15 +48,6 @@ class PostsController < ApplicationController
       @course_sections = CourseSection.all
       render :new
     end
-  end
-
-  def show
-    @post = Post.includes(:post_tags, :tags, :likes, :course_menus, :arrange_menus, :pairing_menus)
-                .find(params[:id])
-  end
-  
-  def edit
-    build_associations(@post)
   end
 
   def update
@@ -71,17 +71,16 @@ class PostsController < ApplicationController
       keywords = params[:q][:recipe_name_or_body_or_course_related_menus_menu_name_or_arrange_related_menus_menu_name_or_pairing_related_menus_menu_name_or_tags_name_cont_all].split(/[[:space:]]+/)
       
       @like_posts = current_user.like_posts.includes(:user)
-                                .merge(Post.search_multiple_keywords(keywords))
-                                .order(created_at: :desc)
-                                .page(params[:page])
+        .merge(Post.search_multiple_keywords(keywords))
+        .order(created_at: :desc)
+        .page(params[:page])
     else
       @like_posts = @q.result(distinct: true)
-                      .includes(:user)
-                      .order(created_at: :desc)
-                      .page(params[:page])
+        .includes(:user)
+        .order(created_at: :desc)
+        .page(params[:page])
     end
   end
-  
 
   private
 
