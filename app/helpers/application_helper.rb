@@ -2,11 +2,11 @@ module ApplicationHelper
   def default_meta_tags
     {
       site: 'サイゼリヤ攻略サイト',
-      title: 'サイゼリヤこうりゃｋあ',
+      title: 'サイゼリヤ攻略サイト',
       reverse: true,
       charset: 'utf-8',
       description: 'サイゼリヤをさらに楽しむためのコミュニティサイトです。',
-      keywords: 'サイゼリヤ,ファミレス,食事',
+      keywords: 'サイゼリヤ,アレンジ,ファミレス',
       canonical: request.original_url,
       separator: '|',
       og:{
