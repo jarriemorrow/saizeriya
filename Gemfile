@@ -90,3 +90,4 @@ gem "sassc-rails"
 gem 'mini_magick'
 gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
+gem 'meta-tags'
