@@ -5,9 +5,6 @@ Rails.application.routes.draw do
     
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-  get 'posts/index'
-  get 'posts/new'
-  get 'posts/show'
   root 'tops#index'
   resources :users
   get 'login', to: 'user_sessions#new'
