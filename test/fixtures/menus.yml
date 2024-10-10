@@ -8,3 +8,8 @@ two:
   menu_name: string2
   price: 300
   menu_no: 2222
+
+three:
+  menu_name: string3
+  price: 300
+  menu_no: 3333
