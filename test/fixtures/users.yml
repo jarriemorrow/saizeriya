@@ -1,9 +1,13 @@
 one:
   name: MyString
   email: admin@example.com  # 異なるメールアドレス
+  crypted_password: $2a$04$YxPSBiQz.pc9qoE.feJxYOWTlEGjeD11JTn3LWSpF5KbIXnwNBo3a
+  salt: ujYYae2ZarQBqVRPfRab
   role: 1  # adminロールを持つユーザー
 
 two:
   name: MyString
   email: user@example.com   # 異なるメールアドレス
+  crypted_password: $2a$04$YxPSBiQz.pc9qoE.feJxYOWTlEGjeD11JTn3LWSpF5KbIXnwNBo3a
+  salt: ujYYae2ZarQBqVRPfRab
   role: 2  # userロールを持つユーザー
