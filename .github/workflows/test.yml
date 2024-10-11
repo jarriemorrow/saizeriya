@@ -22,7 +22,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: rubocop
-    steps:  # インデントを正しくする
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
