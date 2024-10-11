@@ -6,8 +6,9 @@
 #
 one:
   user: one
-  recipe_name: content
-  body: this is a test post
+  recipe_name: テスト１
+  body: おいしいてすと
+  
 two:
   user: two
   recipe_name: content

@@ -51,9 +51,11 @@ class PostsController < ApplicationController
   end
 
   def update
+    puts params.inspect  # デバッグ用にパラメータを表示
     if @post.update(post_params)
       redirect_to @post, notice: '投稿が更新されました。'
     else
+      puts @post.errors.full_messages  # エラーメッセージを表示
       build_associations(@post)
       render :edit
     end
