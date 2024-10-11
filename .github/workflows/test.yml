@@ -1,52 +1,25 @@
 name: Check RuboCop and Run Tests
 on:
   push:
-    branches:
-      - main
 
 jobs:
-  rubocop:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Install dependencies
-        run: bundle install
-
-      - name: Run RuboCop
-        run: bundle exec rubocop
-
   test:
     runs-on: ubuntu-latest
     needs: rubocop
     services:
-      postgres:
+      db:
         image: postgres:latest
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: app_test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U postgres" 
-          --health-interval 10s 
-          --health-timeout 5s 
-          --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
 
       - name: Install dependencies
         run: bundle install
@@ -55,7 +28,12 @@ jobs:
         run: sleep 10
 
       - name: Create database
-        run: bin/rails db:create RAILS_ENV=test
+        run: |
+        cp config/database.yml.ci config/database.yml
+        RAILS_ENV=test bin/rails db:create db:schema:load
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
 
       - name: Run Minitest
         run: bin/rails test
