@@ -56,6 +56,10 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
+group :development, :production do
+  gem 'sassc-rails'
+end
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
@@ -88,7 +92,6 @@ gem "carrierwave", '~>2.2.2'
 gem "rails-i18n"
 gem "dotenv-rails"
 gem "fog-aws"
-# gem "sassc-rails"
 gem 'mini_magick'
 gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
