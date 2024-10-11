@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     services:
-      postgres:
+      db:
         image: postgres:latest
         ports:
           - 5432:5432
