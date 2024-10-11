@@ -16,18 +16,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: app_test
-
-      web:
-        build: .
-        ports:
-          - 3000:3000
-        env:
-          TZ: Asia/Tokyo
-        volumes:
-          - .:/app
-          - bundle_data:/usr/local/bundle:cached
-          - node_modules:/app/node_modules
-
     steps:
       - uses: actions/checkout@v1
 
@@ -58,9 +46,10 @@ jobs:
       # ビルドとテスト
       - name: Build
         run: |
+          docker-compose up -d # Docker Composeでサービスを起動
           bundle install --jobs=4
           bin/rails db:setup assets:precompile
 
       - name: Run tests
         run: |
-          bin/rails test
+          docker-compose exec web bin/rails test # webサービス内でテストを実行
