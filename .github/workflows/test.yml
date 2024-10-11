@@ -21,8 +21,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: rubocop # rubocopジョブの完了を待つ
-    steps:
+    needs: rubocop
       - name: Checkout code
         uses: actions/checkout@v3
 
