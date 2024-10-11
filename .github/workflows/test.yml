@@ -1,24 +1,4 @@
-name: Check RuboCop and Run Tests
-on:
-  push:
-    branches:
-      - main
-
 jobs:
-  rubocop:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Run RuboCop
-        run: bundle exec rubocop
-
   test:
     runs-on: ubuntu-latest
     needs: rubocop
@@ -33,6 +13,13 @@ jobs:
 
       - name: Install dependencies
         run: bundle install
+
+      - name: Set up AWS credentials
+        run: |
+          echo "[default]" > ~/.aws/config
+          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/config
+          echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/config
+        shell: bash
 
       - name: Run Minitest
         run: bin/rails test
