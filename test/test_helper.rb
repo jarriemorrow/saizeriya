@@ -10,6 +10,6 @@ class ActiveSupport::TestCase
   fixtures :all
 
   def log_in_as(user)
-    post login_url, params: { name: "testman", email: user.email, password: 'password',password_confirmation: 'password' }
+    post login_url, params: { name: "testman", email: user.email, password: 'password', password_confirmation: 'password' }
   end
 end
