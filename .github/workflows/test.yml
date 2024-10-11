@@ -1,55 +1,38 @@
-name: Test
+name: Check RuboCop and Run Tests
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
+  rubocop:
     runs-on: ubuntu-latest
-    services:
-      db:
-        image: postgres:latest
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: app_test
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # Rubyセットアップ
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.2'
           bundler-cache: true
 
-      # Node.jsとYarnのセットアップ
-      - name: Set up Node.js and Yarn
-        run: |
-          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/yarn.gpg > /dev/null
-          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-          curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
-          sudo apt update
-          sudo apt install -y yarn nodejs
+      - name: Run RuboCop
+        run: bundle exec rubocop
 
-      # Chromeインストール
-      - name: Install Google Chrome
-        run: |
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/google-chrome.gpg > /dev/null
-          echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt update -y
-          sudo apt install -y google-chrome-stable
+  test:
+    runs-on: ubuntu-latest
+    needs: rubocop # rubocopジョブの完了を待つ
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # ビルドとテスト
-      - name: Build
-        run: |
-          docker-compose up -d # Docker Composeでサービスを起動
-          bundle install --jobs=4
-          bin/rails db:setup assets:precompile
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-      - name: Run tests
-        run: |
-          docker-compose exec web bin/rails test # webサービス内でテストを実行
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run Minitest
+        run: bin/rails test
