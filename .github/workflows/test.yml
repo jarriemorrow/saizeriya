@@ -20,16 +20,17 @@ jobs:
     - uses: actions/checkout@v1
     - name: Set up yarn and node
       run: |
-        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-        curl -sL https://deb.nodesource.com/setup_12.x | bash -
-        apt install -y yarn nodejs
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/yarn.gpg > /dev/null
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
+        sudo apt update
+        sudo apt install -y yarn nodejs
     - name: Install chrome
       run: |
-        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-        echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
-        apt update -y
-        apt install -y google-chrome-stable
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/google-chrome.gpg > /dev/null
+        echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+        sudo apt update -y
+        sudo apt install -y google-chrome-stable
     - name: Build
       run: |
         bundle -j 4
@@ -37,6 +38,6 @@ jobs:
     - name: Run test
       run: |
         bin/rails test
-    - name: Run system test
+    - name: Run minitest
       run: |
-        bin/rails test:system
+        bin/rails test
