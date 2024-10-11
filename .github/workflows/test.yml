@@ -18,6 +18,14 @@ jobs:
           POSTGRES_DB: app_test
     steps:
     - uses: actions/checkout@v1
+
+    # RubyとBundlerのセットアップ
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2.2'
+        bundler-cache: true
+
     - name: Set up yarn and node
       run: |
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/yarn.gpg > /dev/null
@@ -25,19 +33,19 @@ jobs:
         curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -
         sudo apt update
         sudo apt install -y yarn nodejs
+
     - name: Install chrome
       run: |
         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/google-chrome.gpg > /dev/null
         echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
         sudo apt update -y
         sudo apt install -y google-chrome-stable
+
     - name: Build
       run: |
-        bundle -j 4
+        bundle install --jobs=4  # Bundlerで依存関係をインストールします
         bin/rails yarn:install db:setup assets:precompile
+
     - name: Run test
-      run: |
-        bin/rails test
-    - name: Run minitest
       run: |
         bin/rails test
