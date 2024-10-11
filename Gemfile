@@ -88,7 +88,7 @@ gem "carrierwave", '~>2.2.2'
 gem "rails-i18n"
 gem "dotenv-rails"
 gem "fog-aws"
-gem "sassc-rails"
+# gem "sassc-rails"
 gem 'mini_magick'
 gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
