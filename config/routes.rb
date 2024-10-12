@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   post "oauth/callback" => "oauths#callback"
   get "oauth/callback" => "oauths#callback" 
   get "oauth/:provider" => "oauths#oauth", as: :auth_at_provider
-    
+  get "terms_of_service" => "tops#terms_of_service"
+  get "polocy" => "tops#policy"
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root 'tops#index'
