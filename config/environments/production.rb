@@ -1,8 +1,9 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.hosts << "saizeri.fly.dev"
   # Settings specified here will take precedence over those in config/application.rb.
+  config.hosts << "saizeri.fly.dev"
+  config.hosts << "312koryaku.com"
 
   # Code is not reloaded between requests.
   config.cache_classes = true
