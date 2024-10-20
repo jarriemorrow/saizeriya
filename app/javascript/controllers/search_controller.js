@@ -4,8 +4,6 @@ export default class extends Controller {
   static targets = ["input", "results"];
 
   connect() {
-    console.log("SearchController connected");
-
     // ドキュメント全体のクリックを監視する
     document.addEventListener('click', this.handleClickOutside.bind(this));
   }
@@ -16,8 +14,6 @@ export default class extends Controller {
   }
 
   async search(event) {
-    console.log("Search event triggered");
-
     // スペースで区切ってキーワードを取得
     const keywords = this.inputTarget.value.trim().split(/[\s\u3000]+/).filter(Boolean);
     if (keywords.length === 0) {
@@ -27,7 +23,7 @@ export default class extends Controller {
 
     // 各キーワードで検索を行うためのクエリを生成
     const queries = keywords.map(query => encodeURIComponent(query)).join("&query=");
-    const response = await fetch(`/search_menus?query=${queries}`);
+    const response = await fetch(`/search_posts?query=${queries}`);
     if (response.ok) {
       const results = await response.json();
       this.displayResults(results);
