@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
   get 'search_menus', to: 'menus#search'
+  get 'search_posts', to: 'menus#search_post'
   resources :password_resets, only: [:create, :edit, :update, :new]
 
 end
