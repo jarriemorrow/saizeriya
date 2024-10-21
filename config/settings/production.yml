@@ -1,6 +1,6 @@
 default_url_options:
   protocol: 'https'
-  host: 'saizeri.fly.dev'
+  host: '312koryaku.com'
 
 sorcery:
     google_callback_url: 'https://312koryaku.com/oauth/callback?provider=google'
