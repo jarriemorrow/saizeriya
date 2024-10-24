@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to @post, success: '投稿が完了しました'
     else
       build_associations(@post) # renderに戻った際に、associationsがnilにならないようにした
       @course_sections = CourseSection.all
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy!
-    redirect_to posts_path, status: :see_other
+    redirect_to posts_path, status: :see_other, alert: '投稿を削除しました'
   end
 
   def likes
