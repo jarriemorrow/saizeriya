@@ -10,7 +10,6 @@ class UserSessionsController < ApplicationController
       redirect_to root_path, success: 'ログインしました'
     else
       flash.now[:alert] = 'ログインに失敗しました'
-      Rails.logger.info "Flash Danger Message: #{flash[:alert]}"
       render :new, status: :unprocessable_entity
     end
   end
