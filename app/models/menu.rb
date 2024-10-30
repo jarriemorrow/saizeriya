@@ -1,6 +1,5 @@
 class Menu < ApplicationRecord
   enum :status, { active: 0, inactive: 1 }
-  has_many :post_menus, dependent: :destroy
   has_many :posts, through: :post_menus
   has_many :arrange_menus, dependent: :destroy
   has_many :course_menus, dependent: :destroy
