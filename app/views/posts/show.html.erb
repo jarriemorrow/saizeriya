@@ -1,23 +1,23 @@
 <div class="w-5/6 mx-auto my-16 max-w-screen-xl">
   <div class="card lg:card-side bg-base-100 shadow-xl">
-      <div class="swiper">
-        <div class="swiper-wrapper">
+    <div class="swiper">
+      <div class="swiper-wrapper">
         <% if @post.images.present? %>
-        <% @post.images.each do |image| %>
+          <% @post.images.each do |image| %>
+            <div class="swiper-slide">
+            <%= image_tag image.url, class: 'rounded-xl', style: 'max-width: 100%; height: auto;' %>
+            </div>
+          <% end %>
+        <% else %>
           <div class="swiper-slide">
-           <%= image_tag image.url, class: 'rounded-xl', style: 'max-width: 100%; height: auto;' %>
+            <%= image_tag PostUploader.new.default_url, class: 'rounded-xl', style: 'max-width: 100%; height: auto;' %>
           </div>
-         <% end %>
-       <% else %>
-        <div class="swiper-slide">
-          <%= image_tag PostUploader.new.default_url, class: 'rounded-xl', style: 'max-width: 100%; height: auto;' %>
-        </div>
-      <% end %>
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <% end %>
       </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
     <div class="card-body">
       <!-- タグといいねボタンのセクション -->
       <div class="flex justify-between items-end">
@@ -77,7 +77,7 @@
       <div class="my-4">
         <div class="divider">コメント</div>
         <p><%= @post.body %></p>
-        <div class="border my-4">
+        <div class="border my-4"></div>
       </div>
  
       <!-- 編集・削除ボタン -->
