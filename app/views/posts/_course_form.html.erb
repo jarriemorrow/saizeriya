@@ -1,5 +1,6 @@
 <div class="form-group" id="menu-fields-container">
-  <p class="mb-4">コースメニュー作成に必要なメニュー商品を入力してください。</p>
+  <p>コースメニュー作成に必要なメニュー商品を入力してください。</p>
+  <p class="mb-4"><%= link_to "メニュー一覧（外部リンク）", "https://book.saizeriya.co.jp/library/menu1907/book/list", target: :_blank, class: "text-blue-500 " %></p>
   <% @course_sections.each do |course_section| %>
     <% course_menu = @post.course_menus.find { |cm| cm.course_section_id == course_section.id } || @post.course_menus.build(course_section_id: course_section.id) %>
     <%= f.fields_for :course_menus, course_menu do |cm| %>

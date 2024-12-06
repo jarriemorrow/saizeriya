@@ -1,5 +1,6 @@
 <div class="form-group" id="menu-fields-container">
-  <p class="mb-4">アレンジメニュー作成に必要なメニュー商品を入力してください</p>
+  <p>アレンジメニュー作成に必要なメニュー商品を入力してください。</p>
+  <p class="mb-4"><%= link_to "メニュー一覧（外部リンク）", "https://book.saizeriya.co.jp/library/menu1907/book/list", target: :_blank, class: "text-blue-500 " %></p>
   <%= cocooned_container do %>
     <%= f.fields_for :arrange_menus do |menu_fields| %>
       <div class="menu-field item-center">
