@@ -20,7 +20,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'User.count', 1 do
       post users_url, params: { user: { name: "Test User", email: "test@example.com", password: "password", password_confirmation: "password" } }
     end
-    assert_redirected_to root_url
+    assert_redirected_to login_url
   end
 
   test "ユーザー情報更新画面" do
